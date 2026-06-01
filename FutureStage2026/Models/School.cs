@@ -24,17 +24,17 @@ namespace FutureStage2026.Models
         [Required]
         public long AreaId { get; set; }
 
-        public Area Area { get; set; }
+        public Area? Area { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
         public DateTime EstablishmentDate { get; set; }
 
-        public ICollection<SchoolStandard> SchoolStandards { get; set; }
-        public ICollection<SchoolFacility> SchoolFacilities { get; set; }
-        public ICollection<SchoolAchievement> SchoolAchievements { get; set; }
-        public ICollection<Enquiry> Enquiries { get; set; }
+        public ICollection<SchoolStandard>? SchoolStandards { get; set; }
+        public ICollection<SchoolFacility>? SchoolFacilities { get; set; }
+        public ICollection<SchoolAchievement>? SchoolAchievements { get; set; }
+        public ICollection<Enquiry>? Enquiries { get; set; }
 
-        public ICollection<StandardFees> StandardFees { get; set; }
+        public ICollection<StandardFees>? StandardFees { get; set; }
     }
 }

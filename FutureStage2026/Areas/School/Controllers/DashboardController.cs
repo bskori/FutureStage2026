@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace FutureStage2026.Areas.Admin.Controllers
+namespace FutureStage2026.Areas.School.Controllers
 {
-    [Area("Admin")]
+    [Area("School")]
     public class DashboardController : Controller
     {
         public IActionResult Index()

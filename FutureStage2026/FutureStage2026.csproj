@@ -14,9 +14,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\School\Controllers\" />
-    <Folder Include="Areas\School\Views\" />
-  </ItemGroup>
-
 </Project>

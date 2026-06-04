@@ -30,6 +30,7 @@ namespace FutureStage2026.Data
         public DbSet<StandardFees> StandardFees { get; set; }
         public DbSet<StandardSeatQuota> StandardSeatQuotas { get; set; }
         public DbSet<State> States { get; set; }
+        public DbSet<Admin> Admins { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

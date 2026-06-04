@@ -4,11 +4,11 @@ using FutureStage2026.Models;
 using FutureStage2026.ViewModels;
 using System.Linq;
 
-public class AccountController : Controller
+public class ParentController : Controller
 {
     private readonly ApplicationDbContext _context;
 
-    public AccountController(ApplicationDbContext context)
+    public ParentController(ApplicationDbContext context)
     {
         _context = context;
     }
@@ -51,19 +51,20 @@ public class AccountController : Controller
     {
         if (ModelState.IsValid)
         {
-            var user = _context.Parents
+            
+            var parent = _context.Parents
                 .FirstOrDefault(x => x.EmailId == model.EmailId
                                   && x.PasswordHash == model.Password);
 
-            if (user != null)
+            if (parent != null)
             {
-                HttpContext.Session.SetString("UserId", user.Id.ToString());
-                HttpContext.Session.SetString("UserName", user.Name);
+                HttpContext.Session.SetString("ParentId", parent.Id.ToString());
+                HttpContext.Session.SetString("ParentName", parent.Name);
 
                 return RedirectToAction("Index", "Home");
             }
 
-            ModelState.AddModelError("", "Invalid login");
+            ModelState.AddModelError("", "Invalid Email or Password");
         }
 
         return View(model);

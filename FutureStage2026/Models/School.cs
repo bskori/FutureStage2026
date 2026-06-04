@@ -22,6 +22,10 @@ namespace FutureStage2026.Models
         public string ContactNo { get; set; }
 
         [Required]
+        [DataType(DataType.Password)]
+        public string PasswordHas { get; set; }
+
+        [Required]
         public long AreaId { get; set; }
 
         public Area? Area { get; set; }

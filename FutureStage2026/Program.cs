@@ -22,7 +22,7 @@ app.UseRouting();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Account}/{action=Login}/{id?}");
+    pattern: "{controller=Parent}/{action=Login}/{id?}");
 
 app.MapControllerRoute(
     name: "areas",

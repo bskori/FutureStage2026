@@ -7,6 +7,10 @@ namespace FutureStage2026.Areas.Admin.Controllers
     {
         public IActionResult Index()
         {
+            if(HttpContext.Session.GetString("AdminId") == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
             return View();
         }
     }

@@ -1,7 +1,9 @@
 ﻿using FutureStage2026.Data;
 using FutureStage2026.Models;
+using FutureStage2026.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace FutureStage2026.Controllers
 {
@@ -44,5 +46,33 @@ namespace FutureStage2026.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(LoginViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var school = _context.Schools.FirstOrDefault(x => x.EmailId == model.EmailId && x.PasswordHas == model.Password);
+
+            if(school == null)
+            {
+                ModelState.AddModelError("", "Invalid Email or Password");
+                return View(model);
+            }
+
+            HttpContext.Session.SetString("SchoolId", school.Id.ToString());
+
+            return RedirectToAction("Index", "Dashboard", new { area = "School" });
+        }
+        
     }
 }

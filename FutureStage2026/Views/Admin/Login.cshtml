@@ -1,0 +1,70 @@
+﻿@model FutureStage2026.ViewModels.LoginViewModel
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Admin Login";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+
+                <div class="card shadow">
+                    <div class="card-header bg-dark text-white text-center">
+                        <h4>Admin Login</h4>
+                    </div>
+
+                    <div class="card-body">
+                        <form asp-action="Login" method="post">
+
+                            <div class="mb-3">
+                                <label>Email</label>
+                                <input asp-for="EmailId" class="form-control" />
+                                <span asp-validation-for="EmailId" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Password</label>
+                                <input asp-for="Password" type="password" class="form-control" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-dark">Login</button>
+                            </div>
+
+                            <div class="text-danger mt-2">
+                                @Html.ValidationSummary()
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+</body>
+</html>

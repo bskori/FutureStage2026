@@ -1,0 +1,40 @@
+﻿@model Area
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Area</h2>
+
+<form method="post">
+
+    
+    <input asp-for="Id" type="hidden" />
+
+    <div class="mb-3">
+        <label>Area Name</label>
+        <input asp-for="AreaName" class="form-control" />
+        <span asp-validation-for="AreaName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label>City</label>
+        <select asp-for="CityId" asp-items="ViewBag.Cities" class="form-control">
+            <option value="">-- Select City --</option>
+        </select>
+        <span asp-validation-for="CityId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Update</button>
+
+    <a 
+       asp-action="Index"
+       class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

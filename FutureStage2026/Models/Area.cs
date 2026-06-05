@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace FutureStage2026.Models
 {
@@ -11,8 +12,10 @@ namespace FutureStage2026.Models
         [Required]
         public long CityId { get; set; }
 
+        [ValidateNever]
         public City City { get; set; }
 
+        [ValidateNever]
         public ICollection<School> Schools { get; set; }
     }
 }

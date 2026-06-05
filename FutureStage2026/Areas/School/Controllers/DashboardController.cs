@@ -9,7 +9,7 @@ namespace FutureStage2026.Areas.School.Controllers
         {
             if (HttpContext.Session.GetString("SchoolId") == null)
             {
-                return RedirectToAction("Login", "School");
+                return RedirectToAction("Login", "School", new { area = ""});
             }
             return View();
         }

@@ -22,7 +22,31 @@ namespace FutureStage2026.Controllers
                    Text = c.CountryName
                }).ToList();
 
-            return View();
+            var schools = _context.Schools.Include(s => s.Area).ThenInclude(a => a.City).ToList();
+
+
+            return View(schools);
+        }
+
+        public IActionResult GetSchools(long areaId)
+        {
+            var schools = _context.Schools
+                .Where(s => s.AreaId == areaId)
+                .ToList();
+
+            return PartialView("_SchoolList", schools);
+        }
+
+        public IActionResult SchoolDetails(long id)
+        {
+            var school = _context.Schools
+                .Include(s => s.Area)
+                .ThenInclude(a => a.City)
+                .ThenInclude(c => c.State)
+                .ThenInclude(s => s.Country)
+                .FirstOrDefault(s => s.Id == id);
+
+            return View(school);
         }
     }
 }

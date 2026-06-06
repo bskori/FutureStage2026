@@ -1,0 +1,31 @@
+﻿@model School
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg p-4">
+
+        <h2 class="mb-3">@Model.Name</h2>
+
+        <hr />
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <p><strong>Email:</strong> @Model.EmailId</p>
+                <p><strong>Contact:</strong> @Model.ContactNo</p>
+                <p><strong>Established:</strong> @Model.EstablishmentDate.ToShortDateString()</p>
+            </div>
+
+            <div class="col-md-6">
+                <p><strong>Address:</strong> @Model.Address</p>
+                <p><strong>Area:</strong> @Model.Area?.AreaName</p>
+                <p><strong>City:</strong> @Model.Area?.City?.CityName</p>
+                <p><strong>State:</strong> @Model.Area?.City?.State?.StateName</p>
+                <p><strong>Country:</strong> @Model.Area?.City?.State?.Country?.CountryName</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

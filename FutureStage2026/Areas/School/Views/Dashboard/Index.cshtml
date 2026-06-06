@@ -1,6 +1,28 @@
-﻿@{
-    Layout = "~/Areas/School/Views/Shared/_Layout.cshtml";
-}
+﻿@model FutureStage2026.Models.School
+
 
 <h2>School Dashboard</h2>
 <p>Welcome School Panel 🎓</p>
+
+
+<div class="container mt-4">
+
+    <a asp-action="Edit" class="btn btn-primary mt-3">Edit Profile</a>
+
+    <div class="card shadow p-4">
+
+        @if(Model != null)
+        {
+            <h3>Welcome, @Model.Name</h3>
+
+            <hr />
+
+            <p><strong>Email:</strong> @Model.EmailId</p>
+            <p><strong>Contact:</strong> @Model.ContactNo</p>
+            <p><strong>Address:</strong> @Model.Address</p>
+            <p><strong>Area:</strong> @Model.Area?.AreaName</p>
+        }
+
+    </div>
+
+</div>

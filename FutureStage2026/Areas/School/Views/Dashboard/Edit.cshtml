@@ -1,0 +1,37 @@
+﻿@model FutureStage2026.Models.School
+
+<div class="container mt-4">
+    <div class="card shadow p-4">
+
+        <h3>Edit Profile</h3>
+
+        <form method="post">
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label>Name</label>
+                <input asp-for="Name" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Email</label>
+                <input asp-for="EmailId" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Contact</label>
+                <input asp-for="ContactNo" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Address</label>
+                <input asp-for="Address" class="form-control" />
+            </div>
+
+            <button class="btn btn-success">Update</button>
+
+        </form>
+
+    </div>
+</div>

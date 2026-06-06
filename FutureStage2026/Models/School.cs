@@ -23,7 +23,7 @@ namespace FutureStage2026.Models
 
         [Required]
         [DataType(DataType.Password)]
-        public string PasswordHas { get; set; }
+        public string PasswordHash { get; set; }
 
         [Required]
         public long AreaId { get; set; }

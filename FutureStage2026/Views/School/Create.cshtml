@@ -1,60 +1,162 @@
 ﻿@model School
 
-
-
 <div class="container mt-4">
-    <div class="card p-4 shadow">
-        <h3>Add School</h3>
+    <div class="card shadow-lg p-4">
+
+        <h3 class="mb-4 text-center">Register School</h3>
 
         <form asp-action="Create">
 
-            <div class="mb-3">
-                <label asp-for="Name"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+            <div class="row">
+
+                <!-- LEFT -->
+                <div class="col-md-6">
+
+                    <div class="mb-3">
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="EmailId"></label>
+                        <input asp-for="EmailId" class="form-control" />
+                        <span asp-validation-for="EmailId" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ContactNo"></label>
+                        <input asp-for="ContactNo" class="form-control" />
+                        <span asp-validation-for="ContactNo" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT -->
+                <div class="col-md-6">
+
+                    <div class="mb-3">
+                        <label asp-for="Address"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="EstablishmentDate"></label>
+                        <input asp-for="EstablishmentDate" type="date" class="form-control" />
+                        <span asp-validation-for="EstablishmentDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="PasswordHash"></label>
+                        <input asp-for="PasswordHash" type="password" class="form-control" />
+                        <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="mb-3">
-                <label asp-for="Address"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
+            <hr />
+
+            <!-- LOCATION SECTION -->
+            <h5 class="mb-3">Location</h5>
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <label>Country</label>
+                    <select id="CountryId" class="form-control">
+                        <option value="">Select Country</option>
+                        @foreach (var c in ViewBag.Countries)
+                        {
+                            <option value="@c.Value">@c.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label>State</label>
+                    <select id="StateId" class="form-control">
+                        <option value="">Select State</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label>City</label>
+                    <select id="CityId" class="form-control">
+                        <option value="">Select City</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label>Area</label>
+                    <select asp-for="AreaId" id="AreaId" class="form-control">
+                        <option value="">Select Area</option>
+                    </select>
+                    <span asp-validation-for="AreaId" class="text-danger"></span>
+                </div>
 
             </div>
 
-            <div class="mb-3">
-                <label asp-for="EmailId"></label>
-                <input asp-for="EmailId" class="form-control" />
-                <span asp-validation-for="EmailId" class="text-danger"></span>
-
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-success px-5">
+                    Save School
+                </button>
             </div>
-
-            <div class="mb-3">
-                <label asp-for="ContactNo"></label>
-                <input asp-for="ContactNo" class="form-control" />
-                <span asp-validation-for="ContactNo" class="text-danger"></span>
-
-            </div>
-
-            <div class="mb-3">
-                <label>Area</label>
-                <select asp-for="AreaId" asp-items="ViewBag.Areas" class="form-control"></select>
-                <span asp-validation-for="AreaId" class="text-danger"></span>
-
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="EstablishmentDate"></label>
-                <input asp-for="EstablishmentDate" type="date" class="form-control" />
-                <span asp-validation-for="EstablishmentDate" class="text-danger"></span>
-
-            </div>
-
-            <button type="submit" class="btn btn-success">Save</button>
 
         </form>
+
     </div>
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $("#CountryId").change(function () {
+        var countryId = $(this).val();
+
+        $("#StateId").html('<option>Select State</option>');
+        $("#CityId").html('<option>Select City</option>');
+        $("#AreaId").html('<option>Select Area</option>');
+
+        if (countryId) {
+        $.get('/Location/GetStates', { countryId: countryId }, function (data) {
+        $.each(data, function (i, state) {
+        $("#StateId").append('<option value="' + state.id + '">' + state.name + '</option>');
+        });
+        });
+        }
+        });
+
+        $("#StateId").change(function () {
+        var stateId = $(this).val();
+
+        $("#CityId").html('<option>Select City</option>');
+        $("#AreaId").html('<option>Select Area</option>');
+
+        if (stateId) {
+        $.get('/Location/GetCities', { stateId: stateId }, function (data) {
+        $.each(data, function (i, city) {
+        $("#CityId").append('<option value="' + city.id + '">' + city.name + '</option>');
+        });
+        });
+        }
+        });
+
+        $("#CityId").change(function () {
+        var cityId = $(this).val();
+
+        $("#AreaId").html('<option>Select Area</option>');
+
+        if (cityId) {
+        $.get('/Location/GetAreas', { cityId: cityId }, function (data) {
+        $.each(data, function (i, area) {
+        $("#AreaId").append('<option value="' + area.id + '">' + area.name + '</option>');
+        });
+        });
+        }
+        });
+    </script>
+
 }

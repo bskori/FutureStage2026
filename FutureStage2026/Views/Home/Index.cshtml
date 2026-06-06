@@ -1,0 +1,160 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- HERO -->
+<div class="bg-primary text-white text-center py-5">
+    <div class="container">
+        <h1 class="display-4">Find the Best School</h1>
+        <p class="lead">Search schools by location, facilities and more</p>
+    </div>
+</div>
+
+<!-- SEARCH -->
+<div class="container mt-5">
+
+    <div class="card shadow-lg p-4">
+
+        <h4 class="mb-4 text-center">Search Schools</h4>
+
+        <div class="row g-3">
+
+            <div class="col-md-3">
+                <select id="CountryId" class="form-control">
+                    <option value="">Country</option>
+                    @if (ViewBag.Countries != null)
+                    {
+                        foreach (var c in ViewBag.Countries)
+                        {
+                            <option value="@c.Value">@c.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <select id="StateId" class="form-control">
+                    <option value="">State</option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <select id="CityId" class="form-control">
+                    <option value="">City</option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <select id="AreaId" class="form-control">
+                    <option value="">Area</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-4">
+            <button id="searchBtn" class="btn btn-success px-5">
+                Search
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- RESULTS -->
+<div class="container mt-5" id="resultSection"></div>
+
+<!-- FEATURES -->
+<div class="container mt-5">
+    <div class="row text-center">
+
+        <div class="col-md-4">
+            <div class="card shadow p-3">
+                <h5>Top Schools</h5>
+                <p>Find the best-rated schools near you</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow p-3">
+                <h5>Easy Search</h5>
+                <p>Filter schools by location and preferences</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow p-3">
+                <h5>Trusted Data</h5>
+                <p>Verified school information</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+
+    <script src="~/lib/jquery/jquery.min.js"></script>
+
+    <script>
+        $("#CountryId").change(function () {
+        var countryId = $(this).val();
+
+        $("#StateId").html('<option>State</option>');
+        $("#CityId").html('<option>City</option>');
+        $("#AreaId").html('<option>Area</option>');
+
+        if (countryId) {
+        $.get('/Location/GetStates', { countryId: countryId }, function (data) {
+        $.each(data, function (i, state) {
+        $("#StateId").append('<option value="' + state.id + '">' + state.name + '</option>');
+        });
+        });
+        }
+        });
+
+        $("#StateId").change(function () {
+        var stateId = $(this).val();
+
+        $("#CityId").html('<option>City</option>');
+        $("#AreaId").html('<option>Area</option>');
+
+        if (stateId) {
+        $.get('/Location/GetCities', { stateId: stateId }, function (data) {
+        $.each(data, function (i, city) {
+        $("#CityId").append('<option value="' + city.id + '">' + city.name + '</option>');
+        });
+        });
+        }
+        });
+
+        $("#CityId").change(function () {
+        var cityId = $(this).val();
+
+        $("#AreaId").html('<option>Area</option>');
+
+        if (cityId) {
+        $.get('/Location/GetAreas', { cityId: cityId }, function (data) {
+        $.each(data, function (i, area) {
+        $("#AreaId").append('<option value="' + area.id + '">' + area.name + '</option>');
+        });
+        });
+        }
+        });
+
+        $("#searchBtn").click(function () {
+        var areaId = $("#AreaId").val();
+
+        if (!areaId) {
+        alert("Please select area");
+        return;
+        }
+
+        $.get('/Home/GetSchools', { areaId: areaId }, function (data) {
+        $("#resultSection").html(data);
+        });
+        });
+    </script>
+
+}

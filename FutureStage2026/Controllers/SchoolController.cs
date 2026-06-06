@@ -19,10 +19,11 @@ namespace FutureStage2026.Controllers
         public IActionResult Create()
         {
 
-            ViewBag.Areas = _context.Areas.Select(x => new SelectListItem
+            ViewBag.Countries = _context.Countries
+            .Select(c => new SelectListItem
             {
-                Value = x.Id.ToString(),
-                Text = x.AreaName
+                Value = c.Id.ToString(),
+                Text = c.CountryName
             }).ToList();
 
             return View();
@@ -31,18 +32,27 @@ namespace FutureStage2026.Controllers
         [HttpPost]
         public IActionResult Create(School model) 
         {
+            if (!ModelState.IsValid)
+            {
+                foreach(var error in ModelState.Values.SelectMany(x => x.Errors))
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Schools.Add(model);
                 _context.SaveChanges();
-                return RedirectToAction("Create");
+                return RedirectToAction("Login");
             }
 
-            ViewBag.Areas = _context.Areas.Select(x => new SelectListItem
-            {
-                Value = x.Id.ToString(),
-                Text = x.AreaName
-            });
+            ViewBag.Countries = _context.Countries
+             .Select(c => new SelectListItem
+             {
+                 Value = c.Id.ToString(),
+                 Text = c.CountryName
+             }).ToList();
 
             return View(model);
         }
@@ -61,7 +71,7 @@ namespace FutureStage2026.Controllers
                 return View(model);
             }
 
-            var school = _context.Schools.FirstOrDefault(x => x.EmailId == model.EmailId && x.PasswordHas == model.Password);
+            var school = _context.Schools.FirstOrDefault(x => x.EmailId == model.EmailId && x.PasswordHash == model.Password);
 
             if(school == null)
             {

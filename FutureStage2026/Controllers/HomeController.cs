@@ -28,11 +28,28 @@ namespace FutureStage2026.Controllers
             return View(schools);
         }
 
-        public IActionResult GetSchools(long areaId)
+        public IActionResult GetSchools(long? countryId, long? stateId, long? cityId, long? areaId)
         {
-            var schools = _context.Schools
-                .Where(s => s.AreaId == areaId)
-                .ToList();
+            var query = _context.Schools
+                .Include(s => s.Area)
+                    .ThenInclude(a => a.City)
+                        .ThenInclude(c => c.State)
+                            .ThenInclude(s => s.Country)
+                .AsQueryable();
+
+            if (areaId.HasValue)
+                query = query.Where(s => s.AreaId == areaId);
+
+            else if (cityId.HasValue)
+                query = query.Where(s => s.Area.CityId == cityId);
+
+            else if (stateId.HasValue)
+                query = query.Where(s => s.Area.City.StateId == stateId);
+
+            else if (countryId.HasValue)
+                query = query.Where(s => s.Area.City.State.CountryId == countryId);
+
+            var schools = query.ToList();
 
             return PartialView("_SchoolList", schools);
         }

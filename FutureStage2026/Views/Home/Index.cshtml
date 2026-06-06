@@ -144,14 +144,17 @@
         });
 
         $("#searchBtn").click(function () {
+        var countryId = $("#CountryId").val();
+        var stateId = $("#StateId").val();
+        var cityId = $("#CityId").val();
         var areaId = $("#AreaId").val();
 
-        if (!areaId) {
-        alert("Please select area");
-        return;
-        }
-
-        $.get('/Home/GetSchools', { areaId: areaId }, function (data) {
+        $.get('/Home/GetSchools', {
+        countryId: countryId,
+        stateId: stateId,
+        cityId: cityId,
+        areaId: areaId
+        }, function (data) {
         $("#resultSection").html(data);
         });
         });

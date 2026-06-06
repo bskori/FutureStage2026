@@ -560,6 +560,9 @@ namespace FutureStage2026.Migrations
                     b.Property<DateTime>("EstablishmentDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 

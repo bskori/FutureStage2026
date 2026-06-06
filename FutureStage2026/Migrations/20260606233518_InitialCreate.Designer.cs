@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FutureStage2026.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260605082811_InitialCreate")]
+    [Migration("20260606233518_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -562,6 +562,9 @@ namespace FutureStage2026.Migrations
 
                     b.Property<DateTime>("EstablishmentDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");

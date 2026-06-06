@@ -5,7 +5,7 @@
 
         <h3 class="mb-4 text-center">Register School</h3>
 
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
 
             <div class="row">
 
@@ -36,9 +36,8 @@
                 <div class="col-md-6">
 
                     <div class="mb-3">
-                        <label asp-for="Address"></label>
-                        <input asp-for="Address" class="form-control" />
-                        <span asp-validation-for="Address" class="text-danger"></span>
+                        <label>School Image</label>
+                        <input type="file" name="ImageFile" class="form-control" />
                     </div>
 
                     <div class="mb-3">
@@ -53,6 +52,14 @@
                         <span asp-validation-for="PasswordHash" class="text-danger"></span>
                     </div>
 
+                </div>
+                <div class="col-md-12">
+                    
+                    <div class="mb-3">
+                        <label asp-for="Address"></label>
+                        <textarea asp-for="Address" class="form-control"></textarea>
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
                 </div>
 
             </div>

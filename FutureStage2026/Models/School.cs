@@ -21,6 +21,8 @@ namespace FutureStage2026.Models
         [Phone]
         public string ContactNo { get; set; }
 
+        public string? ImagePath { get; set; }
+
         [Required]
         [DataType(DataType.Password)]
         public string PasswordHash { get; set; }

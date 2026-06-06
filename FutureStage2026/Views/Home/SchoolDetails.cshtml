@@ -4,6 +4,11 @@
 
     <div class="card shadow-lg p-4">
 
+        @if (!string.IsNullOrEmpty(Model.ImagePath))
+        {
+            <img src="@Model.ImagePath" class="img-fluid mb-3" />
+        }
+
         <h2 class="mb-3">@Model.Name</h2>
 
         <hr />

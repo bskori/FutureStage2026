@@ -244,6 +244,7 @@ namespace FutureStage2026.Migrations
                     Address = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     EmailId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AreaId = table.Column<long>(type: "bigint", nullable: false),
                     EstablishmentDate = table.Column<DateTime>(type: "datetime2", nullable: false),

@@ -30,18 +30,27 @@ namespace FutureStage2026.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(School model) 
+        public IActionResult Create(School model, IFormFile ImageFile) 
         {
-            if (!ModelState.IsValid)
-            {
-                foreach(var error in ModelState.Values.SelectMany(x => x.Errors))
-                {
-                    Console.WriteLine(error.ErrorMessage);
-                }
-            }
+           
 
             if (ModelState.IsValid)
             {
+                if(ImageFile != null)
+                {
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
+
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Frontend/Images", fileName);
+
+                    using(var stream = new FileStream(path, FileMode.Create))
+                    {
+                        ImageFile.CopyTo(stream);
+                    }
+
+                    model.ImagePath = "/Frontend/Images/" + fileName;
+
+                }
+
                 _context.Schools.Add(model);
                 _context.SaveChanges();
                 return RedirectToAction("Login");

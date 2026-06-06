@@ -63,8 +63,10 @@
 </div>
 
 <!-- RESULTS -->
-<div class="container mt-5" id="resultSection"></div>
-
+<div class="container mt-5">
+    <h3 class="mb-3 text-center">Search Results</h3>
+    <div id="resultSection"></div>
+</div>
 <!-- FEATURES -->
 <div class="container mt-5">
     <div class="row text-center">
@@ -144,6 +146,10 @@
         });
 
         $("#searchBtn").click(function () {
+
+        $("#resultSection").html("<p class='text-center'>Loading schools...</p>");
+
+
         var countryId = $("#CountryId").val();
         var stateId = $("#StateId").val();
         var cityId = $("#CityId").val();

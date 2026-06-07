@@ -32,6 +32,7 @@ namespace FutureStage2026.Data
         public DbSet<State> States { get; set; }
         public DbSet<Admin> Admins { get; set; }
 
+        public DbSet<Review> Reviews { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

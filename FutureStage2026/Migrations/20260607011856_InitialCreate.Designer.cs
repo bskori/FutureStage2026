@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FutureStage2026.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260606233518_InitialCreate")]
+    [Migration("20260607011856_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -533,6 +533,46 @@ namespace FutureStage2026.Migrations
                     b.HasDiscriminator().HasValue("Quota");
                 });
 
+            modelBuilder.Entity("FutureStage2026.Models.Review", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<long>("SchoolId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SchoolId");
+
+                    b.ToTable("Reviews");
+
+                    b.HasDiscriminator().HasValue("Review");
+                });
+
             modelBuilder.Entity("FutureStage2026.Models.School", b =>
                 {
                     b.Property<long>("Id")
@@ -934,6 +974,17 @@ namespace FutureStage2026.Migrations
                     b.Navigation("Enquiry");
                 });
 
+            modelBuilder.Entity("FutureStage2026.Models.Review", b =>
+                {
+                    b.HasOne("FutureStage2026.Models.School", "School")
+                        .WithMany("Reviews")
+                        .HasForeignKey("SchoolId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("School");
+                });
+
             modelBuilder.Entity("FutureStage2026.Models.School", b =>
                 {
                     b.HasOne("FutureStage2026.Models.Area", "Area")
@@ -1090,6 +1141,8 @@ namespace FutureStage2026.Migrations
             modelBuilder.Entity("FutureStage2026.Models.School", b =>
                 {
                     b.Navigation("Enquiries");
+
+                    b.Navigation("Reviews");
 
                     b.Navigation("SchoolAchievements");
 

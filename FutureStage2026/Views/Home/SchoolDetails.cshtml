@@ -33,4 +33,53 @@
 
     </div>
 
+    <hr />
+
+    <h4>Add Review</h4>
+
+    <form asp-action="AddReview" method="post">
+
+        <input type="hidden" name="SchoolId" value="@Model.Id" />
+
+        <div class="mb-2">
+            <input type="text" name="UserName" class="form-control" placeholder="Your Name" required />
+        </div>
+
+        <div class="mb-2">
+            <select name="Rating" class="form-control">
+                <option value="5">⭐⭐⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="1">⭐</option>
+            </select>
+        </div>
+
+        <div class="mb-2">
+            <textarea name="Comment" class="form-control" placeholder="Write your review"></textarea>
+        </div>
+
+        <button class="btn btn-success">Submit Review</button>
+
+    </form>
+
+    <hr />
+
+    <h4>Reviews</h4>
+
+    @if (Model.Reviews != null && Model.Reviews.Any())
+    {
+        foreach (var r in Model.Reviews)
+        {
+            <div class="card mb-2 p-2">
+                <strong>@r.UserName</strong> - ⭐ @r.Rating
+                <p>@r.Comment</p>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No reviews yet</p>
+    }
+
 </div>

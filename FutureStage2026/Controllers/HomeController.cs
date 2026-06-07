@@ -1,4 +1,5 @@
 ﻿using FutureStage2026.Data;
+using FutureStage2026.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -61,9 +62,19 @@ namespace FutureStage2026.Controllers
                 .ThenInclude(a => a.City)
                 .ThenInclude(c => c.State)
                 .ThenInclude(s => s.Country)
+                .Include(s => s.Reviews)
                 .FirstOrDefault(s => s.Id == id);
 
             return View(school);
+        }
+
+        [HttpPost]
+        public IActionResult AddReview(Review model)
+        {
+            _context.Reviews.Add(model);
+            _context.SaveChanges();
+
+            return RedirectToAction("SchoolDetails", new { id = model.SchoolId });
         }
     }
 }

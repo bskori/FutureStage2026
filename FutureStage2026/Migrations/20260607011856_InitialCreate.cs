@@ -264,6 +264,31 @@ namespace FutureStage2026.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Reviews",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SchoolId = table.Column<long>(type: "bigint", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rating = table.Column<int>(type: "int", nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reviews", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Reviews_Schools_SchoolId",
+                        column: x => x.SchoolId,
+                        principalTable: "Schools",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SchoolAchievements",
                 columns: table => new
                 {
@@ -567,6 +592,11 @@ namespace FutureStage2026.Migrations
                 column: "EnquiryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Reviews_SchoolId",
+                table: "Reviews",
+                column: "SchoolId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SchoolAchievements_SchoolId",
                 table: "SchoolAchievements",
                 column: "SchoolId");
@@ -647,6 +677,9 @@ namespace FutureStage2026.Migrations
 
             migrationBuilder.DropTable(
                 name: "Mediums");
+
+            migrationBuilder.DropTable(
+                name: "Reviews");
 
             migrationBuilder.DropTable(
                 name: "SchoolAchievements");

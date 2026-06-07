@@ -40,7 +40,7 @@ namespace FutureStage2026.Models
         public ICollection<SchoolFacility>? SchoolFacilities { get; set; }
         public ICollection<SchoolAchievement>? SchoolAchievements { get; set; }
         public ICollection<Enquiry>? Enquiries { get; set; }
-
+        public ICollection<Review>? Reviews { get; set; }
         public ICollection<StandardFees>? StandardFees { get; set; }
     }
 }

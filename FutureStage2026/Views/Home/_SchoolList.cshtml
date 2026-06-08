@@ -32,6 +32,14 @@
                         @school.Name
                     </h5>
 
+                    <p>
+                        ⭐ @(
+                        school.Reviews != null && school.Reviews.Any()
+                        ? school.Reviews.Average(r => r.Rating).ToString("0.0")
+                        : "No rating"
+                        )
+                    </p>
+
                     <p class="mb-1">
                         📍 @school.Area?.AreaName
                     </p>

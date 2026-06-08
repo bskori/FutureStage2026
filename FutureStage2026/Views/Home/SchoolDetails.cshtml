@@ -11,6 +11,29 @@
 
         <h2 class="mb-3">@Model.Name</h2>
 
+        @if (ViewBag.AvgRating > 0)
+        {
+            <p>
+                <strong>Rating:</strong>
+
+                @{
+                    int fullStars = (int)Math.Floor((double)ViewBag.AvgRating);
+                }
+
+                @for (int i = 0; i < fullStars; i++)
+                {
+                    <span style="color: gold;">★</span>
+                }
+
+                @for (int i = fullStars; i < 5; i++)
+                {
+                    <span style="color: lightgray;">★</span>
+                }
+
+                (@ViewBag.AvgRating.ToString("0.0"))
+            </p>
+        }
+
         <hr />
 
         <div class="row">
@@ -19,6 +42,8 @@
                 <p><strong>Email:</strong> @Model.EmailId</p>
                 <p><strong>Contact:</strong> @Model.ContactNo</p>
                 <p><strong>Established:</strong> @Model.EstablishmentDate.ToShortDateString()</p>
+                <p><strong>Board:</strong>@Model.EducationBoard?.EducationBoardTitle</p>
+                <p><strong>Medium</strong>@Model.Medium?.MediumTitle</p>
             </div>
 
             <div class="col-md-6">
@@ -28,6 +53,22 @@
                 <p><strong>State:</strong> @Model.Area?.City?.State?.StateName</p>
                 <p><strong>Country:</strong> @Model.Area?.City?.State?.Country?.CountryName</p>
             </div>
+
+            <h5>Facilities</h5>
+
+            @if (Model.SchoolFacilities != null && Model.SchoolFacilities.Any())
+            {
+                <ul>
+                    @foreach (var sf in Model.SchoolFacilities)
+                    {
+                        <li>@sf.Facility.FacilityTitle</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>No facilities listed</p>
+            }
 
         </div>
 

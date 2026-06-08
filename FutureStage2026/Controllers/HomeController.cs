@@ -63,7 +63,15 @@ namespace FutureStage2026.Controllers
                 .ThenInclude(c => c.State)
                 .ThenInclude(s => s.Country)
                 .Include(s => s.Reviews)
+                .Include(s => s.EducationBoard)
+                .Include(s => s.Medium)
+                .Include(s => s.SchoolFacilities)
+                .ThenInclude(sf => sf.Facility)
                 .FirstOrDefault(s => s.Id == id);
+
+            ViewBag.AvgRating = (school.Reviews != null && school.Reviews.Any())
+                ? school.Reviews.Average(r => r.Rating) 
+                : 0;
 
             return View(school);
         }
@@ -71,6 +79,13 @@ namespace FutureStage2026.Controllers
         [HttpPost]
         public IActionResult AddReview(Review model)
         {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("SchoolDetails", new { id = model.SchoolId });
+            }
+
+            model.CreatedAt = DateTime.UtcNow;
+
             _context.Reviews.Add(model);
             _context.SaveChanges();
 

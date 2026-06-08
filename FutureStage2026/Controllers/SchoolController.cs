@@ -26,13 +26,37 @@ namespace FutureStage2026.Controllers
                 Text = c.CountryName
             }).ToList();
 
+            ViewBag.Boards = _context.EducationBoards.Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.EducationBoardTitle
+            });
+
+            ViewBag.Mediums = _context.Mediums.Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.MediumTitle
+            });
+
+            ViewBag.Facilities = _context.Facilities.Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.FacilityTitle
+            });
+
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(School model, IFormFile ImageFile) 
+        public IActionResult Create(School model, IFormFile ImageFile, List<long> SelectedFacilities) 
         {
-           
+            if (!ModelState.IsValid)
+            {
+                foreach(var error in ModelState.Values.SelectMany(x => x.Errors))
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                }
+            }
 
             if (ModelState.IsValid)
             {
@@ -53,6 +77,20 @@ namespace FutureStage2026.Controllers
 
                 _context.Schools.Add(model);
                 _context.SaveChanges();
+
+                if(SelectedFacilities != null)
+                {
+                    foreach(var facilityId in SelectedFacilities)
+                    {
+                        _context.SchoolFacilities.Add(new SchoolFacility
+                        {
+                            SchoolId = model.Id,
+                            FacilityId = facilityId
+                        });
+                    }
+                    _context.SaveChanges();
+                }
+
                 return RedirectToAction("Login");
             }
 
@@ -62,6 +100,24 @@ namespace FutureStage2026.Controllers
                  Value = c.Id.ToString(),
                  Text = c.CountryName
              }).ToList();
+
+            ViewBag.Boards = _context.EducationBoards.Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.EducationBoardTitle
+            });
+
+            ViewBag.Mediums = _context.Mediums.Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.MediumTitle
+            });
+
+            ViewBag.Facilities = _context.Facilities.Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.FacilityTitle
+            });
 
             return View(model);
         }

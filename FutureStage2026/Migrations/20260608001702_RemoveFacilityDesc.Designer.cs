@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FutureStage2026.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260607011856_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260608001702_RemoveFacilityDesc")]
+    partial class RemoveFacilityDesc
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -368,7 +368,6 @@ namespace FutureStage2026.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FacilityDesc")
-                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -596,6 +595,9 @@ namespace FutureStage2026.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<long?>("EducationBoardId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("EmailId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -608,6 +610,9 @@ namespace FutureStage2026.Migrations
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<long?>("MediumId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -624,6 +629,10 @@ namespace FutureStage2026.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AreaId");
+
+                    b.HasIndex("EducationBoardId");
+
+                    b.HasIndex("MediumId");
 
                     b.ToTable("Schools");
 
@@ -682,11 +691,6 @@ namespace FutureStage2026.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("FacilityDesc")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
 
                     b.Property<long>("FacilityId")
                         .HasColumnType("bigint");
@@ -993,7 +997,19 @@ namespace FutureStage2026.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FutureStage2026.Models.EducationBoard", "EducationBoard")
+                        .WithMany()
+                        .HasForeignKey("EducationBoardId");
+
+                    b.HasOne("FutureStage2026.Models.Medium", "Medium")
+                        .WithMany()
+                        .HasForeignKey("MediumId");
+
                     b.Navigation("Area");
+
+                    b.Navigation("EducationBoard");
+
+                    b.Navigation("Medium");
                 });
 
             modelBuilder.Entity("FutureStage2026.Models.SchoolAchievement", b =>

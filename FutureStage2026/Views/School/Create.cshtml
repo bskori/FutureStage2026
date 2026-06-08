@@ -30,6 +30,23 @@
                         <span asp-validation-for="ContactNo" class="text-danger"></span>
                     </div>
 
+                    <div class="mb-3">
+                        <label>Medium</label>
+                        <select asp-for="MediumId" asp-items="ViewBag.Mediums" class="form-control"></select>
+                        <span asp-validation-for="MediumId" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Facilities</label>
+                        @foreach (var facility in ViewBag.Facilities)
+                        {
+                            <div class="form-check">
+                                <input type="checkbox" name="SelectedFacilities" value="@facility.Value" class="form-check-input" />
+                                <label class="form-check-label">@facility.Text</label>
+                            </div>
+                        }
+                    </div>
+
                 </div>
 
                 <!-- RIGHT -->
@@ -52,15 +69,21 @@
                         <span asp-validation-for="PasswordHash" class="text-danger"></span>
                     </div>
 
-                </div>
-                <div class="col-md-12">
-                    
+                    <div class="mb-3">
+                        <label>Education Board</label>
+                        <select asp-for="EducationBoardId" asp-items="ViewBag.Boards" class="form-control"></select>
+                    </div>
+
                     <div class="mb-3">
                         <label asp-for="Address"></label>
                         <textarea asp-for="Address" class="form-control"></textarea>
                         <span asp-validation-for="Address" class="text-danger"></span>
                     </div>
-                </div>
+
+                 </div>   
+
+                
+                
 
             </div>
 

@@ -68,7 +68,7 @@ namespace FutureStage2026.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FacilityTitle = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    FacilityDesc = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    FacilityDesc = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
@@ -247,6 +247,8 @@ namespace FutureStage2026.Migrations
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AreaId = table.Column<long>(type: "bigint", nullable: false),
+                    EducationBoardId = table.Column<long>(type: "bigint", nullable: true),
+                    MediumId = table.Column<long>(type: "bigint", nullable: true),
                     EstablishmentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -261,6 +263,16 @@ namespace FutureStage2026.Migrations
                         principalTable: "Areas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Schools_EducationBoards_EducationBoardId",
+                        column: x => x.EducationBoardId,
+                        principalTable: "EducationBoards",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Schools_Mediums_MediumId",
+                        column: x => x.MediumId,
+                        principalTable: "Mediums",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -617,6 +629,16 @@ namespace FutureStage2026.Migrations
                 column: "AreaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Schools_EducationBoardId",
+                table: "Schools",
+                column: "EducationBoardId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Schools_MediumId",
+                table: "Schools",
+                column: "MediumId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SchoolStandards_SchoolId",
                 table: "SchoolStandards",
                 column: "SchoolId");
@@ -670,13 +692,7 @@ namespace FutureStage2026.Migrations
                 name: "AdmissionProcesses");
 
             migrationBuilder.DropTable(
-                name: "EducationBoards");
-
-            migrationBuilder.DropTable(
                 name: "EnquiryReplies");
-
-            migrationBuilder.DropTable(
-                name: "Mediums");
 
             migrationBuilder.DropTable(
                 name: "Reviews");
@@ -719,6 +735,12 @@ namespace FutureStage2026.Migrations
 
             migrationBuilder.DropTable(
                 name: "Areas");
+
+            migrationBuilder.DropTable(
+                name: "EducationBoards");
+
+            migrationBuilder.DropTable(
+                name: "Mediums");
 
             migrationBuilder.DropTable(
                 name: "Cities");

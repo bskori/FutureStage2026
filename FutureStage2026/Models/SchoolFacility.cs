@@ -15,7 +15,6 @@ namespace FutureStage2026.Models
 
         public Facility Facility { get; set; }
 
-        [StringLength(250)]
-        public string FacilityDesc { get; set; }
+        
     }
 }

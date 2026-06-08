@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace FutureStage2026.Models
 {
@@ -31,6 +32,15 @@ namespace FutureStage2026.Models
         public long AreaId { get; set; }
 
         public Area? Area { get; set; }
+
+        public long? EducationBoardId { get; set; }
+        [ValidateNever]
+        public EducationBoard EducationBoard { get; set; }
+
+        public long? MediumId { get; set; }
+        [ValidateNever]
+        public Medium Medium { get; set; }
+
 
         [Required]
         [DataType(DataType.Date)]

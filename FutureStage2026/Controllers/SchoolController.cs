@@ -3,6 +3,7 @@ using FutureStage2026.Models;
 using FutureStage2026.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace FutureStage2026.Controllers
@@ -121,6 +122,8 @@ namespace FutureStage2026.Controllers
 
             return View(model);
         }
+
+        
 
         [HttpGet]
         public IActionResult Login()

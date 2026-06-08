@@ -40,6 +40,49 @@ namespace FutureStage2026.Data
                 );
             }
 
+            // FeeHeads
+            if (!context.FeeHeads.Any())
+            {
+                context.FeeHeads.AddRange(
+                    new FeeHead { FeeHeadTitle = "Tuition Fee", FeeHeadDesc = "Monthly tuition charges" },
+                    new FeeHead { FeeHeadTitle = "Transport Fee", FeeHeadDesc = "Bus/transport charges" },
+                    new FeeHead { FeeHeadTitle = "Admission Fee", FeeHeadDesc = "One-time admission fee" }
+                );
+            }
+
+            // Standards
+            if (!context.Standards.Any())
+            {
+                context.Standards.AddRange(
+                    new Standard { StandardTitle = "Nursery", StandardDesc = "Pre-primary level" },
+                    new Standard { StandardTitle = "KG", StandardDesc = "Kindergarten" },
+                    new Standard { StandardTitle = "1st", StandardDesc = "Grade 1" },
+                    new Standard { StandardTitle = "2nd", StandardDesc = "Grade 2" }
+                );
+            }
+
+            // 🔹 School Standards Mapping
+            
+            if (!context.SchoolStandards.Any())
+            {
+                var school = context.Schools.FirstOrDefault();
+                var standards = context.Standards.ToList();
+
+                if (school != null && standards.Any())
+                {
+                    foreach (var std in standards)
+                    {
+                        context.SchoolStandards.Add(new SchoolStandard
+                        {
+                            SchoolId = school.Id,
+                            StandardId = std.Id
+                        });
+                    }
+                }
+
+                context.SaveChanges();
+            }
+
             context.SaveChanges();
         }
     }

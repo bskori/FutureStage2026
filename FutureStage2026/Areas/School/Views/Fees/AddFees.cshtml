@@ -1,0 +1,32 @@
+﻿<form method="post">
+
+    <input type="hidden" name="schoolId" value="@ViewBag.SchoolId" />
+
+    <div class="mb-3">
+        <label>Standard</label>
+        <select name="schoolStandardId" class="form-control">
+            @foreach (var s in ViewBag.SchoolStandards)
+            {
+                <option value="@s.Id">@s.Standard.StandardTitle</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Fee Type</label>
+        <select name="feeHeadId" class="form-control">
+            @foreach (var f in ViewBag.FeeHeads)
+            {
+                <option value="@f.Id">@f.FeeHeadTitle</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Amount</label>
+        <input type="number" name="amount" class="form-control" />
+    </div>
+
+    <button class="btn btn-success">Save</button>
+
+</form>

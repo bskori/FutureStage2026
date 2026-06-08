@@ -70,6 +70,38 @@
                 <p>No facilities listed</p>
             }
 
+            <h4>Fees Structure</h4>
+
+            @foreach (var ss in Model.SchoolStandards)
+            {
+                <h5>@ss.Standard.StandardTitle</h5>
+
+                if (ss.StandardFees != null && ss.StandardFees.Any())
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Fee Type</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var fee in ss.StandardFees)
+                            {
+                                <tr>
+                                    <td>@fee.FeeHead.FeeHeadTitle</td>
+                                    <td>₹ @fee.Amount</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>No fees added</p>
+                }
+            }
+
         </div>
 
     </div>

@@ -67,6 +67,11 @@ namespace FutureStage2026.Controllers
                 .Include(s => s.Medium)
                 .Include(s => s.SchoolFacilities)
                 .ThenInclude(sf => sf.Facility)
+                .Include(s => s.SchoolStandards)
+                .ThenInclude(ss => ss.Standard)
+                .Include(s => s.SchoolStandards)
+                .ThenInclude(ss => ss.StandardFees)
+                .ThenInclude(sf => sf.FeeHead)
                 .FirstOrDefault(s => s.Id == id);
 
             ViewBag.AvgRating = (school.Reviews != null && school.Reviews.Any())

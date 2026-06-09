@@ -1,0 +1,24 @@
+﻿@model EnquiryVM
+
+<div class="container mt-4">
+    <div class="card p-4 shadow">
+
+        <h3>Apply to School</h3>
+
+        <form method="post">
+
+            <input type="hidden" asp-for="SchoolId" />
+
+            <input asp-for="ParentName" class="form-control" placeholder="Name" />
+            <input asp-for="Email" class="form-control" placeholder="Email" />
+            <input asp-for="MobileNo" class="form-control" placeholder="Mobile" />
+            <input asp-for="Address" class="form-control" placeholder="Address" />
+
+            <textarea asp-for="EnquiryDesc" class="form-control"></textarea>
+
+            <button class="btn btn-success">Apply</button>
+
+        </form>
+
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<FutureStage2026.Models.Enquiry>
+
+<h3>Student Applications</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Message</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if(Model != null && Model.Any())
+        {
+            @foreach (var e in Model)
+            {
+                <tr>
+                    <td>@e.Parent?.Name</td>
+                    <td>@e.Parent?.EmailId</td>
+                    <td>@e.EnquiryDesc</td>
+                    <td>
+                        <a asp-action="Reply" asp-route-id="@e.Id" class="btn btn-primary">
+                            Reply
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">No enquiries found</td>
+            </tr>
+        }
+    </tbody>
+</table>

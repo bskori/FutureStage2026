@@ -7,7 +7,7 @@ namespace FutureStage2026.Models
         [Required]
         public long SchoolStandardId { get; set; }
 
-        public SchoolStandard SchoolStandard { get; set; }
+        public SchoolStandard? SchoolStandard { get; set; }
 
         [Required]
         [StringLength(150)]

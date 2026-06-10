@@ -28,6 +28,8 @@ namespace FutureStage2026.Controllers
         [HttpPost]
         public IActionResult Create(EnquiryVM vm)
         {
+
+
             if (ModelState.IsValid)
             {
                 var parent = new Parent
@@ -42,6 +44,9 @@ namespace FutureStage2026.Controllers
                 _context.Parents.Add(parent);
                 _context.SaveChanges();
 
+
+               
+
                 var enquiry = new Enquiry
                 {
                     SchoolId = vm.SchoolId,
@@ -50,6 +55,13 @@ namespace FutureStage2026.Controllers
                     EnquiryType = EnquiryType.Admission,
                     EnquiryDate = DateTime.Now
                 };
+
+                var parentIdStr = HttpContext.Session.GetString("ParentId");
+
+                if (!string.IsNullOrEmpty(parentIdStr))
+                {
+                    enquiry.ParentId = Convert.ToInt64(parentIdStr);
+                }
 
                 _context.Enquiries.Add(enquiry);
                 _context.SaveChanges();

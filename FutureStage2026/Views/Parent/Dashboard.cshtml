@@ -1,0 +1,24 @@
+﻿@model List<Enquiry>
+
+<h3>My Applications</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>School</th>
+            <th>Standard</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var e in Model)
+        {
+            <tr>
+                <td>@e.School?.Name</td>
+                <td>@e.SchoolStandard?.Standard?.StandardTitle</td>
+                <td>@e.AdmissionStatus</td>
+            </tr>
+        }
+    </tbody>
+</table>

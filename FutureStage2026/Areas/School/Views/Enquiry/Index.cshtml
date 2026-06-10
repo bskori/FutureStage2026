@@ -1,4 +1,5 @@
-﻿@model IEnumerable<FutureStage2026.Models.Enquiry>
+﻿@using FutureStage2026.Enums
+@model IEnumerable<FutureStage2026.Models.Enquiry>
 
 <h3>Student Applications</h3>
 
@@ -8,12 +9,13 @@
             <th>Name</th>
             <th>Email</th>
             <th>Message</th>
+            <th>Status</th>   
             <th>Action</th>
         </tr>
     </thead>
 
     <tbody>
-        @if(Model != null && Model.Any())
+        @if (Model != null && Model.Any())
         {
             @foreach (var e in Model)
             {
@@ -21,10 +23,48 @@
                     <td>@e.Parent?.Name</td>
                     <td>@e.Parent?.EmailId</td>
                     <td>@e.EnquiryDesc</td>
+
+                    
                     <td>
-                        <a asp-action="Reply" asp-route-id="@e.Id" class="btn btn-primary">
+                        @if (e.AdmissionStatus == AdmissionStatus.Pending)
+                        {
+                            <span class="badge bg-warning">Pending</span>
+                        }
+                        else if (e.AdmissionStatus == AdmissionStatus.Approved)
+                        {
+                            <span class="badge bg-success">Accepted</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Rejected</span>
+                        }
+                    </td>
+
+                    <td>
+                        <a asp-action="Reply" asp-route-id="@e.Id" class="btn btn-primary btn-sm">
                             Reply
                         </a>
+
+                        @if (e.AdmissionStatus == AdmissionStatus.Pending)
+                        {
+                            <a asp-action="UpdateStatus"
+                               asp-route-enquiryId="@e.Id"
+                               asp-route-status="accept"
+                               class="btn btn-success btn-sm">
+                                Accept
+                            </a>
+
+                            <a asp-action="UpdateStatus"
+                               asp-route-enquiryId="@e.Id"
+                               asp-route-status="reject"
+                               class="btn btn-danger btn-sm">
+                                Reject
+                            </a>
+                        }
+                        else
+                        {
+                            <span class="text-muted">Action Taken</span>
+                        }
                     </td>
                 </tr>
             }

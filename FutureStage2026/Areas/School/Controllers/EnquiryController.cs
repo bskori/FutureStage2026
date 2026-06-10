@@ -52,5 +52,27 @@ namespace FutureStage2026.Areas.School.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult UpdateStatus(long enquiryId, string status)
+        {
+            var enquiry = _context.Enquiries.FirstOrDefault(x => x.Id == enquiryId);
+
+            if (enquiry == null)
+                return NotFound();
+
+            if (status == "accept")
+            {
+                enquiry.AdmissionStatus = AdmissionStatus.Approved;
+                enquiry.ConfirmationDate = DateTime.Now;
+            }
+            else if (status == "reject")
+            {
+                enquiry.AdmissionStatus = AdmissionStatus.Rejected;
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }

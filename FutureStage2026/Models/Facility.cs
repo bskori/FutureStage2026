@@ -11,6 +11,6 @@ namespace FutureStage2026.Models
 
         [StringLength(250)]
         public string? FacilityDesc { get; set; }
-        public ICollection<SchoolFacility> SchoolFacilities { get; set; }
+        public ICollection<SchoolFacility>? SchoolFacilities { get; set; }
     }
 }

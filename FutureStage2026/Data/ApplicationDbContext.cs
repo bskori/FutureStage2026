@@ -12,7 +12,7 @@ namespace FutureStage2026.Data
         public DbSet<AdmissionProcess> AdmissionProcesses { get; set; }
         public DbSet<Area> Areas { get; set; }
         public DbSet<City> Cities { get; set; }
-        public DbSet<BaseEntity> BaseEntities { get; set; }
+        //public DbSet<BaseEntity> BaseEntities { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<EducationBoard> EducationBoards { get; set; }
         public DbSet<Enquiry> Enquiries { get; set; }

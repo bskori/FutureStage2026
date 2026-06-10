@@ -58,24 +58,42 @@ namespace FutureStage2026.Controllers
         public IActionResult SchoolDetails(long id)
         {
             var school = _context.Schools
-                .Include(s => s.Area)
-                .ThenInclude(a => a.City)
-                .ThenInclude(c => c.State)
-                .ThenInclude(s => s.Country)
-                .Include(s => s.Reviews)
-                .Include(s => s.EducationBoard)
-                .Include(s => s.Medium)
-                .Include(s => s.SchoolFacilities)
-                .ThenInclude(sf => sf.Facility)
-                .Include(s => s.SchoolStandards)
-                .ThenInclude(ss => ss.Standard)
-                .Include(s => s.SchoolStandards)
-                .ThenInclude(ss => ss.StandardFees)
-                .ThenInclude(sf => sf.FeeHead)
-                .FirstOrDefault(s => s.Id == id);
+                .Include(x => x.Area)
+                    .ThenInclude(a => a.City)
+                    .ThenInclude(c => c.State)
+                    .ThenInclude(s => s.Country)
 
-            ViewBag.AvgRating = (school.Reviews != null && school.Reviews.Any())
-                ? school.Reviews.Average(r => r.Rating) 
+                .Include(x => x.EducationBoard)
+                .Include(x => x.Medium)
+
+                .Include(x => x.SchoolFacilities)
+                    .ThenInclude(sf => sf.Facility)
+
+                .Include(x => x.SchoolAchievements)
+
+                .Include(x => x.Reviews)
+
+                
+                .Include(x => x.SchoolStandards)
+                    .ThenInclude(ss => ss.AdmissionProcesses)
+
+                .Include(x => x.SchoolStandards)
+                    .ThenInclude(ss => ss.AdmissionPrerequisites)
+
+                .Include(x => x.SchoolStandards)
+                    .ThenInclude(ss => ss.Standard)
+
+                .Include(x => x.SchoolStandards)
+                    .ThenInclude(ss => ss.StandardFees)
+                        .ThenInclude(f => f.FeeHead)
+
+                .FirstOrDefault(x => x.Id == id);
+
+            if (school == null)
+                return NotFound();
+
+            ViewBag.AvgRating = school.Reviews.Any()
+                ? school.Reviews.Average(r => r.Rating)
                 : 0;
 
             return View(school);

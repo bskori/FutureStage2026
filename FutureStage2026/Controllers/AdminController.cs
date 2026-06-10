@@ -36,7 +36,13 @@ namespace FutureStage2026.Controllers
 
             HttpContext.Session.SetString("AdminId", admin.Id.ToString());
 
-            return RedirectToAction("Indiex", "Dashboard", new { area = "Admin" });
+            return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction(nameof(Login));
         }
     }
 }

@@ -4,13 +4,17 @@
 
     <div class="card shadow-lg p-4">
 
+        <!-- IMAGE -->
         @if (!string.IsNullOrEmpty(Model.ImagePath))
         {
-            <img src="@Model.ImagePath" class="img-fluid mb-3" />
+            <img src="@Model.ImagePath" class="img-fluid mb-3"
+                 style="height:300px;object-fit:cover;width:100%;" />
         }
 
+        <!-- NAME -->
         <h2 class="mb-3">@Model.Name</h2>
 
+        <!-- RATING -->
         @if (ViewBag.AvgRating > 0)
         {
             <p>
@@ -36,14 +40,15 @@
 
         <hr />
 
+        <!-- BASIC INFO -->
         <div class="row">
 
             <div class="col-md-6">
                 <p><strong>Email:</strong> @Model.EmailId</p>
                 <p><strong>Contact:</strong> @Model.ContactNo</p>
                 <p><strong>Established:</strong> @Model.EstablishmentDate.ToShortDateString()</p>
-                <p><strong>Board:</strong>@Model.EducationBoard?.EducationBoardTitle</p>
-                <p><strong>Medium</strong>@Model.Medium?.MediumTitle</p>
+                <p><strong>Board:</strong> @Model.EducationBoard?.EducationBoardTitle</p>
+                <p><strong>Medium:</strong> @Model.Medium?.MediumTitle</p>
             </div>
 
             <div class="col-md-6">
@@ -54,31 +59,118 @@
                 <p><strong>Country:</strong> @Model.Area?.City?.State?.Country?.CountryName</p>
             </div>
 
-            <h5>Facilities</h5>
+        </div>
 
-            @if (Model.SchoolFacilities != null && Model.SchoolFacilities.Any())
+        <hr />
+
+        <!-- FACILITIES -->
+        <h4>Facilities</h4>
+
+        @if (Model.SchoolFacilities != null && Model.SchoolFacilities.Any())
+        {
+            @foreach (var sf in Model.SchoolFacilities)
             {
-                <ul>
-                    @foreach (var sf in Model.SchoolFacilities)
-                    {
-                        <li>@sf.Facility.FacilityTitle</li>
-                    }
-                </ul>
+                <span class="badge bg-info me-2 mb-2">
+                    @sf.Facility?.FacilityTitle
+                </span>
             }
-            else
+        }
+        else
+        {
+            <p>No facilities listed</p>
+        }
+
+        <hr />
+
+        <!-- ACHIEVEMENTS -->
+        <h4>Achievements</h4>
+
+        @if (Model.SchoolAchievements != null && Model.SchoolAchievements.Any())
+        {
+            <ul>
+                @foreach (var a in Model.SchoolAchievements)
+                {
+                    <li>@a.Title</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No achievements added</p>
+        }
+
+        <hr />
+
+        <!-- ADMISSION PROCESS -->
+        <h4>Admission Process</h4>
+
+        @if (Model.SchoolStandards != null && Model.SchoolStandards.Any())
+        {
+            foreach (var ss in Model.SchoolStandards)
             {
-                <p>No facilities listed</p>
+                <h5>@ss.Standard?.StandardTitle</h5>
+
+                if (ss.AdmissionProcesses != null && ss.AdmissionProcesses.Any())
+                {
+                    <ol>
+                        @foreach (var step in ss.AdmissionProcesses)
+                        {
+                            <li>
+                                <strong>@step.ProcessTitle</strong> - @step.ProcessDesc
+                            </li>
+                        }
+                    </ol>
+                }
+                else
+                {
+                    <p>No process defined</p>
+                }
             }
+        }
 
-            <h4>Fees Structure</h4>
+        <hr />
 
-            @foreach (var ss in Model.SchoolStandards)
+        <!-- PREREQUISITES -->
+        <h4>Required Documents</h4>
+
+        @if (Model.SchoolStandards != null && Model.SchoolStandards.Any())
+        {
+            foreach (var ss in Model.SchoolStandards)
             {
-                <h5>@ss.Standard.StandardTitle</h5>
+                <h5>@ss.Standard?.StandardTitle</h5>
+
+                if (ss.AdmissionPrerequisites != null && ss.AdmissionPrerequisites.Any())
+                {
+                    <ul>
+                        @foreach (var doc in ss.AdmissionPrerequisites)
+                        {
+                            <li>
+                                <strong>@doc.PrerequisiteTitle</strong> - @doc.PrerequisiteDesc
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>No prerequisites defined</p>
+                }
+            }
+        }
+
+        <hr />
+
+        <!-- FEES -->
+        <h4>Fees Structure</h4>
+
+        @if (Model.SchoolStandards != null && Model.SchoolStandards.Any())
+        {
+            foreach (var ss in Model.SchoolStandards)
+            {
+                <h5>@ss.Standard?.StandardTitle</h5>
 
                 if (ss.StandardFees != null && ss.StandardFees.Any())
                 {
-                    <table class="table">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Fee Type</th>
@@ -89,7 +181,7 @@
                             @foreach (var fee in ss.StandardFees)
                             {
                                 <tr>
-                                    <td>@fee.FeeHead.FeeHeadTitle</td>
+                                    <td>@fee.FeeHead?.FeeHeadTitle</td>
                                     <td>₹ @fee.Amount</td>
                                 </tr>
                             }
@@ -101,13 +193,13 @@
                     <p>No fees added</p>
                 }
             }
-
-        </div>
+        }
 
     </div>
 
     <hr />
 
+    <!-- ADD REVIEW -->
     <h4>Add Review</h4>
 
     <form asp-action="AddReview" method="post">
@@ -115,7 +207,8 @@
         <input type="hidden" name="SchoolId" value="@Model.Id" />
 
         <div class="mb-2">
-            <input type="text" name="UserName" class="form-control" placeholder="Your Name" required />
+            <input type="text" name="UserName" class="form-control"
+                   placeholder="Your Name" required />
         </div>
 
         <div class="mb-2">
@@ -129,7 +222,8 @@
         </div>
 
         <div class="mb-2">
-            <textarea name="Comment" class="form-control" placeholder="Write your review"></textarea>
+            <textarea name="Comment" class="form-control"
+                      placeholder="Write your review"></textarea>
         </div>
 
         <button class="btn btn-success">Submit Review</button>
@@ -138,6 +232,7 @@
 
     <hr />
 
+    <!-- REVIEWS -->
     <h4>Reviews</h4>
 
     @if (Model.Reviews != null && Model.Reviews.Any())
@@ -154,12 +249,15 @@
     {
         <p>No reviews yet</p>
     }
+
     <hr />
 
-    <a asp-controller="Enquiry" asp-action="Create" asp-route-schoolId="@Model.Id"
+    <!-- APPLY -->
+    <a asp-controller="Enquiry"
+       asp-action="Create"
+       asp-route-schoolId="@Model.Id"
        class="btn btn-primary">
         Apply Now
     </a>
 
 </div>
-

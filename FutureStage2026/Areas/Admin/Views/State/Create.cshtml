@@ -4,32 +4,105 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Add State</h2>
+<div class="card shadow-sm border-0">
 
+    <div class="card-header bg-white">
 
+        <div class="d-flex justify-content-between align-items-center">
 
-<form asp-action="Create" method="post">
+            <div>
+                <h3 class="mb-0 fw-bold">Add State</h3>
+                <small class="text-muted">
+                    Create a new state
+                </small>
+            </div>
 
-    <div class="mb-3">
-        <label>State Name</label>
-        <input asp-for="StateName" class="form-control" />
-        <span asp-validation-for="StateName" class="text-danger"></span>
+            <a asp-action="Index"
+               class="btn btn-outline-secondary">
+
+                <i class="bi bi-arrow-left"></i>
+                Back to List
+
+            </a>
+
+        </div>
+
     </div>
 
-    <div class="mb-3">
-        <label>Country</label>
-        <select asp-for="CountryId" asp-items="ViewBag.Countries" class="form-control">
-            <option value="">-- Select Country --</option>
-        </select>
-        <span asp-validation-for="CountryId" class="text-danger"></span>
+    <div class="card-body">
+
+        <form method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger">
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="StateName"
+                       class="form-label fw-semibold">
+                    State Name
+                </label>
+
+                <input asp-for="StateName"
+                       class="form-control"
+                       placeholder="Enter State Name" />
+
+                <span asp-validation-for="StateName"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="CountryId"
+                       class="form-label fw-semibold">
+                    Country
+                </label>
+
+                <select asp-for="CountryId"
+                        asp-items="ViewBag.Countries"
+                        class="form-select">
+
+                    <option value="">
+                        -- Select Country --
+                    </option>
+
+                </select>
+
+                <span asp-validation-for="CountryId"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <hr />
+
+            <div class="d-flex gap-2">
+
+                <button type="submit"
+                        class="btn btn-success">
+
+                    <i class="bi bi-check-circle me-1"></i>
+                    Save State
+
+                </button>
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    Cancel
+
+                </a>
+
+            </div>
+
+        </form>
+
     </div>
 
-    <button type="submit" class="btn btn-success">Save</button>
-    <a asp-action="Index" class="btn btn-secondary">
-        Cancel
-    </a>
-
-</form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

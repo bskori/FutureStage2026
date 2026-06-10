@@ -1,44 +1,137 @@
-﻿@model IEnumerable<FutureStage2026.Models.Standard>
+﻿@model IEnumerable<Standard>
 
-<h2>Standards</h2>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
 
-<a asp-action="Create" class="btn btn-success mb-3">Add Standard</a>
+<div class="card shadow-sm border-0">
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
+    <div class="card-header bg-white">
 
-    <tbody>
-        @if (Model != null && Model.Any())
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+                <h3 class="mb-0 fw-bold">
+                    Standards
+                </h3>
+
+                <small class="text-muted">
+                    Manage all academic standards
+                </small>
+            </div>
+
+            <a asp-action="Create"
+               class="btn btn-primary">
+
+                <i class="bi bi-plus-circle me-1"></i>
+                Add Standard
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="card-body">
+
+        <span class="badge bg-primary mb-3">
+            Total Standards : @Model.Count()
+        </span>
+
+        @if (Model.Any())
         {
-            foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.StandardTitle</td>
-                    <td>@item.StandardDesc</td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Edit</a>
+            <div class="table-responsive">
 
-                        <a asp-action="Delete"
-                           asp-route-id="@item.Id"
-                           class="btn btn-danger btn-sm"
-                           onclick="return confirm('Are you sure?')">
-                            Delete
-                        </a>
-                    </td>
-                </tr>
-            }
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-light">
+
+                        <tr>
+                            <th>#</th>
+                            <th>Standard</th>
+                            <th>Description</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @{
+                            int sr = 1;
+                        }
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>@sr</td>
+
+                                <td>
+                                    <strong>@item.StandardTitle</strong>
+                                </td>
+
+                                <td>
+
+                                    @if (!string.IsNullOrWhiteSpace(item.StandardDesc))
+                                    {
+                                        @(item.StandardDesc.Length > 60
+                                            ? item.StandardDesc.Substring(0, 60) + "..."
+                                            : item.StandardDesc)
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">N/A</span>
+                                    }
+
+                                </td>
+
+                                <td class="text-center">
+
+                                    <a asp-action="Edit"
+                                       asp-route-id="@item.Id"
+                                       class="btn btn-warning btn-sm me-1">
+
+                                        <i class="bi bi-pencil-square"></i>
+
+                                    </a>
+
+                                    <a asp-action="Delete"
+                                       asp-route-id="@item.Id"
+                                       class="btn btn-danger btn-sm">
+
+                                        <i class="bi bi-trash"></i>
+
+                                    </a>
+
+                                </td>
+
+                            </tr>
+
+                            sr++;
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
         }
         else
         {
-            <tr>
-                <td colspan="3">No data found</td>
-            </tr>
+            <div class="text-center py-5">
+
+                <i class="bi bi-mortarboard display-3 text-secondary"></i>
+
+                <h5>No Standards Found</h5>
+
+                <p class="text-muted">
+                    Click Add Standard to create your first standard.
+                </p>
+
+            </div>
         }
-    </tbody>
-</table>
+
+    </div>
+
+</div>

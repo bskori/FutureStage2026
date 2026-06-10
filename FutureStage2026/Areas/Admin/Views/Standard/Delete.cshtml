@@ -1,4 +1,4 @@
-﻿@model State
+﻿@model Standard
 
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -12,7 +12,7 @@
 
             <i class="bi bi-exclamation-triangle-fill me-2"></i>
 
-            Delete State
+            Delete Standard
 
         </h4>
 
@@ -29,20 +29,30 @@
 
         <h5 class="mb-4">
 
-            Are you sure you want to delete this state?
+            Are you sure you want to delete this standard?
 
         </h5>
 
         <table class="table table-bordered">
 
             <tr>
-                <th style="width:200px;">State Name</th>
-                <td>@Model.StateName</td>
+                <th style="width:200px;">
+                    Standard Title
+                </th>
+
+                <td>
+                    @Model.StandardTitle
+                </td>
             </tr>
 
             <tr>
-                <th>Country</th>
-                <td>@Model.Country?.CountryName</td>
+                <th>Description</th>
+
+                <td>
+                    @(string.IsNullOrWhiteSpace(Model.StandardDesc)
+                        ? "N/A"
+                        : Model.StandardDesc)
+                </td>
             </tr>
 
         </table>
@@ -57,7 +67,7 @@
                         class="btn btn-danger">
 
                     <i class="bi bi-trash me-1"></i>
-                    Delete State
+                    Delete Standard
 
                 </button>
 

@@ -1,54 +1,121 @@
-﻿@model List<State>
+﻿@model IEnumerable<State>
 
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+<div class="card shadow-sm border-0">
 
+    <div class="card-header bg-white">
 
-<h2>States</h2>
+        <div class="d-flex justify-content-between align-items-center">
 
-<a  asp-action="Create" class="btn btn-primary mb-3">
-    Add State
-</a>
+            <div>
+                <h3 class="mb-0 fw-bold">States</h3>
+                <small class="text-muted">
+                    Manage all states
+                </small>
+            </div>
 
-<table class="table table-bordered table-striped">
-    <thead class="table-dark">
-        <tr>
-            <th>ID</th>
-            <th>State Name</th>
-            <th>Country</th>
-            <th style="width: 220px;">Actions</th>
-        </tr>
-    </thead>
+            <a asp-action="Create"
+               class="btn btn-primary">
 
-    <tbody>
-        @foreach (var item in Model)
+                <i class="bi bi-plus-circle me-1"></i>
+                Add State
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="card-body">
+
+        <span class="badge bg-primary mb-3">
+            Total States : @Model.Count()
+        </span>
+
+        @if (Model.Any())
         {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.StateName</td>
-                <td>@item.Country?.CountryName</td>
-                <td>
+            <div class="table-responsive">
 
-                    <!-- Edit -->
-                    <a 
-                       asp-action="Edit"
-                       asp-route-id="@item.Id"
-                       class="btn btn-warning btn-sm me-1">
-                        Edit
-                    </a>
+                <table class="table table-hover align-middle">
 
-                    <!-- Delete -->
-                    
-                    <a asp-action="Delete"
-                       asp-route-id="@item.Id"
-                       class="btn btn-danger btn-sm">
-                        Delete
-                    </a>
+                    <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>State</th>
+                            <th>Country</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
 
-                </td>
-            </tr>
+                    <tbody>
+
+                        @{
+                            int sr = 1;
+                        }
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>@sr</td>
+
+                                <td>
+                                    <strong>@item.StateName</strong>
+                                </td>
+
+                                <td>
+                                    @item.Country?.CountryName
+                                </td>
+
+                                <td class="text-center">
+
+                                    <a asp-action="Edit"
+                                       asp-route-id="@item.Id"
+                                       class="btn btn-warning btn-sm me-1">
+
+                                        <i class="bi bi-pencil-square"></i>
+
+                                    </a>
+
+                                    <a asp-action="Delete"
+                                       asp-route-id="@item.Id"
+                                       class="btn btn-danger btn-sm">
+
+                                        <i class="bi bi-trash"></i>
+
+                                    </a>
+
+                                </td>
+
+                            </tr>
+
+                            sr++;
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
         }
-    </tbody>
-</table>
+        else
+        {
+            <div class="text-center py-5">
+
+                <i class="bi bi-geo-alt display-3 text-secondary"></i>
+
+                <h5>No States Found</h5>
+
+                <p class="text-muted">
+                    Click Add State to create your first state.
+                </p>
+
+            </div>
+        }
+
+    </div>
+
+</div>

@@ -66,7 +66,22 @@ namespace FutureStage2026.Areas.Admin.Controllers
         }
 
         // DELETE
+        [HttpGet]
         public IActionResult Delete(long id)
+        {
+            var data = _context.Mediums.Find(id);
+
+            if(data == null)
+            {
+                return NotFound();
+            }
+
+            return View(data);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public IActionResult DeleteConfirmed(long id)
         {
             var data = _context.Mediums.Find(id);
 

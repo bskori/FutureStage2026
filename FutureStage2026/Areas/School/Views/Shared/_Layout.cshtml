@@ -1,41 +1,241 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>School Panel</title>
+
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+
+            body {
+                background-color: #f4f6f9;
+                overflow-x: hidden;
+            }
+
+            .sidebar {
+                width: 260px;
+                min-height: 100vh;
+                background: #198754;
+                position: fixed;
+                left: 0;
+                top: 0;
+            }
+
+            .sidebar-header {
+                padding: 20px;
+                text-align: center;
+                color: white;
+                border-bottom: 1px solid rgba(255,255,255,.2);
+            }
+
+            .sidebar .nav-link {
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                margin: 5px 10px;
+                transition: 0.3s;
+            }
+
+                .sidebar .nav-link:hover {
+                    background: rgba(255,255,255,.15);
+                }
+
+            .main-content {
+                margin-left: 260px;
+            }
+
+            .top-navbar {
+                background: white;
+                box-shadow: 0 2px 8px rgba(0,0,0,.08);
+                padding: 15px 25px;
+            }
+
+            .content-wrapper {
+                padding: 25px;
+            }
+
+            .page-card {
+                background: white;
+                border-radius: 15px;
+                padding: 25px;
+                box-shadow: 0 2px 10px rgba(0,0,0,.08);
+            }
+
+            .school-avatar {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                background: #198754;
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+            }
+
+    </style>
+
 </head>
+
 <body>
 
-    <nav class="navbar navbar-dark bg-success">
-        <div class="container-fluid">
-            <span class="navbar-brand">School Panel</span>
-            <a class="btn btn-danger" href="#">Logout</a>
-        </div>
-    </nav>
+    <!-- Sidebar -->
 
-    <div class="d-flex">
+    <div class="sidebar">
 
-        <div class="bg-light p-3" style="width:250px; height:100vh;">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="/School/Dashboard">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">My School</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Standards</a>
-                </li>
+        <div class="sidebar-header">
 
-            </ul>
+            <h4 class="mb-0">
+                <i class="bi bi-mortarboard-fill"></i>
+                School Panel
+            </h4>
+
+            <small>FutureStage School</small>
+
         </div>
 
-        <div class="p-4 w-100">
-            @RenderBody()
+        <ul class="nav flex-column mt-3">
+
+            <li class="nav-item">
+
+                <a class="nav-link"
+                   href="/School/Dashboard">
+
+                    <i class="bi bi-speedometer2 me-2"></i>
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a class="nav-link"
+                   href="#">
+
+                    <i class="bi bi-building me-2"></i>
+                    My School
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a class="nav-link"
+                   href="#">
+
+                    <i class="bi bi-book me-2"></i>
+                    Standards
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a class="nav-link"
+                   href="#">
+
+                    <i class="bi bi-people me-2"></i>
+                    Admissions
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a class="nav-link"
+                   href="#">
+
+                    <i class="bi bi-images me-2"></i>
+                    Gallery
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- Main Content -->
+
+    <div class="main-content">
+
+        <!-- Top Navbar -->
+
+        <div class="top-navbar">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <div>
+
+                    <h5 class="mb-0 fw-bold">
+                        School Dashboard
+                    </h5>
+
+                </div>
+
+                <div class="d-flex align-items-center">
+
+                    <div class="school-avatar me-3">
+
+                        S
+
+                    </div>
+
+                    <div class="me-3">
+
+                        <strong>School Admin</strong>
+                        <br />
+                        <small class="text-muted">
+                            Welcome Back
+                        </small>
+
+                    </div>
+
+                    <a href="#"
+                       class="btn btn-outline-danger">
+
+                        <i class="bi bi-box-arrow-right"></i>
+                        Logout
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Page Content -->
+
+        <div class="content-wrapper">
+
+            <div class="page-card">
+
+                @RenderBody()
+
+            </div>
+
         </div>
 
     </div>
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+
 </body>
+
 </html>

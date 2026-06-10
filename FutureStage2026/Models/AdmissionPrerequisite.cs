@@ -11,7 +11,7 @@ namespace FutureStage2026.Models
         [Required]
         public long SchoolStandardId { get; set; }
 
-        public SchoolStandard SchoolStandard { get; set; }
+        public SchoolStandard? SchoolStandard { get; set; }
 
         [StringLength(500)]
         public string PrerequisiteDesc { get; set; }

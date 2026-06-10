@@ -1,0 +1,85 @@
+﻿@model FutureStage2026.Models.AdmissionPrerequisite
+
+<div class="card border-danger shadow-sm">
+
+    <div class="card-header bg-danger text-white">
+
+        <h4 class="mb-0">
+
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+
+            Delete Admission Prerequisite
+
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="alert alert-warning">
+
+            <strong>Warning!</strong>
+            This action cannot be undone.
+
+        </div>
+
+        <table class="table table-bordered">
+
+            <tr>
+                <th style="width:250px">
+                    Title
+                </th>
+
+                <td>
+                    @Model.PrerequisiteTitle
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    School Standard
+                </th>
+
+                <td>
+                    @Model.SchoolStandardId
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    Description
+                </th>
+
+                <td>
+                    @(string.IsNullOrEmpty(Model.PrerequisiteDesc)
+                        ? "N/A"
+                        : Model.PrerequisiteDesc)
+                </td>
+            </tr>
+
+        </table>
+
+        <form method="post">
+
+            <input asp-for="Id" type="hidden" />
+
+            <button type="submit"
+                    class="btn btn-danger">
+
+                <i class="bi bi-trash me-1"></i>
+                Delete
+
+            </button>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>

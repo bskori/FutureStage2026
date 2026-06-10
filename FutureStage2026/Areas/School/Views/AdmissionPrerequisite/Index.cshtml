@@ -1,0 +1,105 @@
+﻿@model IEnumerable<FutureStage2026.Models.AdmissionPrerequisite>
+
+@{
+    ViewData["Title"] = "Admission Prerequisites";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+        <h3 class="fw-bold mb-1">Admission Prerequisites</h3>
+        <p class="text-muted mb-0">
+            Manage admission requirements for school standards
+        </p>
+    </div>
+
+    <a asp-action="Create"
+       class="btn btn-success">
+
+        <i class="bi bi-plus-circle me-1"></i>
+        Add Prerequisite
+
+    </a>
+
+</div>
+
+<div class="card border-0 shadow-sm">
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+                <thead class="table-light">
+
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>School Standard</th>
+                        <th width="180">Actions</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @{
+                        int sr = 1;
+                    }
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>@sr</td>
+
+                            <td>
+                                <strong>@item.PrerequisiteTitle</strong>
+                            </td>
+
+                            <td>
+                                @(string.IsNullOrEmpty(item.PrerequisiteDesc)
+                                    ? "N/A"
+                                    : item.PrerequisiteDesc)
+                            </td>
+
+                            <td>
+                                @item.SchoolStandardId
+                            </td>
+
+                            <td>
+
+                                <a asp-action="Edit"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-warning btn-sm">
+
+                                    <i class="bi bi-pencil-square"></i>
+
+                                </a>
+
+                                <a asp-action="Delete"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-danger btn-sm">
+
+                                    <i class="bi bi-trash"></i>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        sr++;
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

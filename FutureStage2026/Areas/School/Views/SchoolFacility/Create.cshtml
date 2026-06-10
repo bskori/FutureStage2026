@@ -1,0 +1,71 @@
+﻿@model SchoolFacility
+
+<div class="card shadow-sm border-0">
+
+    <div class="card-header bg-white">
+
+        <h3 class="fw-bold mb-0">
+            Add Facility
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger">
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="FacilityId"
+                       class="form-label fw-semibold">
+
+                    Facility
+
+                </label>
+
+                <select asp-for="FacilityId"
+                        asp-items="ViewBag.Facilities"
+                        class="form-select">
+
+                    <option value="">
+                        -- Select Facility --
+                    </option>
+
+                </select>
+
+                <span asp-validation-for="FacilityId"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <hr />
+
+            <button type="submit"
+                    class="btn btn-success">
+
+                <i class="bi bi-check-circle me-1"></i>
+                Save
+
+            </button>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

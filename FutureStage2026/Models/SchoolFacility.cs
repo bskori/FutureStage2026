@@ -8,12 +8,12 @@ namespace FutureStage2026.Models
         [Required]
         public long SchoolId { get; set; }
 
-        public School School { get; set; }
+        public School? School { get; set; }
 
         [Required]
         public long FacilityId { get; set; }
 
-        public Facility Facility { get; set; }
+        public Facility? Facility { get; set; }
 
         
     }

@@ -1,0 +1,18 @@
+﻿@model FutureStage2026.Models.EducationBoard
+
+<h2>Edit Education Board</h2>
+
+<form asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Board Title</label>
+        <input asp-for="EducationBoardTitle" class="form-control" />
+        <span asp-validation-for="EducationBoardTitle" class="text-danger"></span>
+    </div>
+
+    <button class="btn btn-primary">Update</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+
+</form>

@@ -1,0 +1,73 @@
+﻿@model SchoolAchievement
+
+<div class="card border-danger shadow-sm">
+
+    <div class="card-header bg-danger text-white">
+
+        <h4 class="mb-0">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            Delete Achievement
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="alert alert-warning">
+
+            <strong>Warning!</strong>
+            This action cannot be undone.
+
+        </div>
+
+        <table class="table table-bordered">
+
+            <tr>
+                <th style="width:220px;">
+                    Achievement Date
+                </th>
+                <td>
+                    @Model.SchoolAchievementDate.ToString("dd MMM yyyy")
+                </td>
+            </tr>
+
+            <tr>
+                <th>Title</th>
+                <td>@Model.Title</td>
+            </tr>
+
+            <tr>
+                <th>Description</th>
+                <td>
+                    @(string.IsNullOrWhiteSpace(Model.Desc)
+                        ? "N/A"
+                        : Model.Desc)
+                </td>
+            </tr>
+
+        </table>
+
+        <form method="post">
+
+            <input asp-for="Id" type="hidden" />
+
+            <button type="submit"
+                    class="btn btn-danger">
+
+                <i class="bi bi-trash me-1"></i>
+                Delete
+
+            </button>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>

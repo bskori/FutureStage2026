@@ -17,6 +17,6 @@ namespace FutureStage2026.Models
         [Required]
         public long SchoolId { get; set; }
 
-        public School School { get; set; }
+        public School? School { get; set; }
     }
 }

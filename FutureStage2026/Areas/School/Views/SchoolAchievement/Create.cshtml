@@ -1,0 +1,91 @@
+﻿@model SchoolAchievement
+
+<div class="card shadow-sm border-0">
+
+    <div class="card-header bg-white">
+        <h3 class="mb-0 fw-bold">
+            Add School Achievement
+        </h3>
+    </div>
+
+    <div class="card-body">
+
+        <form method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger">
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="SchoolAchievementDate"
+                       class="form-label fw-semibold">
+                </label>
+
+                <input asp-for="SchoolAchievementDate"
+                       type="date"
+                       class="form-control" />
+
+                <span asp-validation-for="SchoolAchievementDate"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="Title"
+                       class="form-label fw-semibold">
+                </label>
+
+                <input asp-for="Title"
+                       class="form-control" />
+
+                <span asp-validation-for="Title"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="Desc"
+                       class="form-label fw-semibold">
+                </label>
+
+                <textarea asp-for="Desc"
+                          rows="4"
+                          class="form-control"></textarea>
+
+                <span asp-validation-for="Desc"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <hr />
+
+            <button type="submit"
+                    class="btn btn-success">
+
+                <i class="bi bi-check-circle me-1"></i>
+                Save Achievement
+
+            </button>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,8 +1,84 @@
-﻿
-@{
+﻿@{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Admin Dashboard</h2>
+<div class="container-fluid">
 
-<p>Welcome to Admin Panel 🚀</p>
+    <!-- PAGE TITLE -->
+    <div class="mb-4">
+        <h2 class="fw-bold">Dashboard</h2>
+        <p class="text-muted">Welcome back 👋 Manage your platform efficiently</p>
+    </div>
+
+    <!-- STATS CARDS -->
+    <div class="row g-4">
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Schools</h6>
+                    <h3 class="fw-bold text-primary">@(ViewBag.TotalSchools ?? 0)
+                        </h3>
+                    <i class="bi bi-building text-primary fs-3"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Parents</h6>
+                    <h3 class="fw-bold text-success">@(ViewBag.TotalParents ?? 0)</h3>
+                    <i class="bi bi-people text-success fs-3"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Enquiries</h6>
+                    <h3 class="fw-bold text-warning">@(ViewBag.TotalEnquiries ?? 0)</h3>
+                    <i class="bi bi-chat-dots text-warning fs-3"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Reviews</h6>
+                    <h3 class="fw-bold text-danger">@(ViewBag.TotalReviews ?? 0)</h3>
+                    <i class="bi bi-star text-danger fs-3"></i>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- QUICK ACTIONS -->
+    <div class="mt-5">
+        <h5 class="fw-bold mb-3">Quick Actions</h5>
+
+        <div class="d-flex gap-3 flex-wrap">
+
+            <a href="/Admin/School/Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Add School
+            </a>
+
+            <a href="/Admin/Country" class="btn btn-outline-secondary">
+                <i class="bi bi-globe"></i> Manage Locations
+            </a>
+
+            <a href="/Admin/Facility" class="btn btn-outline-info">
+                <i class="bi bi-building-check"></i> Facilities
+            </a>
+
+            <a href="/Admin/EducationBoard" class="btn btn-outline-dark">
+                <i class="bi bi-book"></i> Education Boards
+            </a>
+
+        </div>
+    </div>
+
+</div>

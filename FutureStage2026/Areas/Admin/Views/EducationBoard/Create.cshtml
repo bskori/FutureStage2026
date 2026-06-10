@@ -1,16 +1,86 @@
 ﻿@model FutureStage2026.Models.EducationBoard
 
-<h2>Add Education Board</h2>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
 
-<form asp-action="Create" method="post">
+<div class="card shadow-sm border-0">
 
-    <div class="mb-3">
-        <label class="form-label">Board Title</label>
-        <input asp-for="EducationBoardTitle" class="form-control" />
-        <span asp-validation-for="EducationBoardTitle" class="text-danger"></span>
+    <div class="card-header bg-white">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+                <h3 class="mb-0 fw-bold">
+                    Add Education Board
+                </h3>
+
+                <small class="text-muted">
+                    Create a new education board
+                </small>
+            </div>
+
+            <a asp-action="Index"
+               class="btn btn-outline-secondary">
+
+                <i class="bi bi-arrow-left"></i>
+                Back to List
+
+            </a>
+
+        </div>
+
     </div>
 
-    <button class="btn btn-success">Save</button>
-    <a asp-action="Index" class="btn btn-secondary">Back</a>
+    <div class="card-body">
 
-</form>
+        <form asp-action="Create" method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger">
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="EducationBoardTitle"
+                       class="form-label fw-semibold">
+                    Board Title
+                </label>
+
+                <input asp-for="EducationBoardTitle"
+                       class="form-control"
+                       placeholder="Enter Board Title" />
+
+                <span asp-validation-for="EducationBoardTitle"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <hr />
+
+            <div class="d-flex gap-2">
+
+                <button type="submit"
+                        class="btn btn-success">
+
+                    <i class="bi bi-check-circle me-1"></i>
+                    Save Board
+
+                </button>
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    <i class="bi bi-x-circle me-1"></i>
+                    Cancel
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

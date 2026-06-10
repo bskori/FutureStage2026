@@ -1,10 +1,43 @@
 ﻿@model Facility
 
-<h2>Facility Details</h2>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
 
-<div class="card p-3">
-    <p><strong>Name:</strong> @Model.FacilityTitle</p>
-    <p><strong>Description:</strong> @Model.FacilityDesc</p>
+<div class="card shadow-sm border-0">
+
+    <div class="card-header bg-white">
+
+        <h3 class="mb-0 fw-bold">
+            Facility Details
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-bordered">
+
+            <tr>
+                <th style="width:200px;">Facility Name</th>
+                <td>@Model.FacilityTitle</td>
+            </tr>
+
+            <tr>
+                <th>Description</th>
+                <td>@Model.FacilityDesc</td>
+            </tr>
+
+        </table>
+
+        <a asp-action="Index"
+           class="btn btn-secondary">
+
+            <i class="bi bi-arrow-left me-1"></i>
+            Back
+
+        </a>
+
+    </div>
+
 </div>
-
-<a asp-action="Index" class="btn btn-secondary mt-2">Back</a>

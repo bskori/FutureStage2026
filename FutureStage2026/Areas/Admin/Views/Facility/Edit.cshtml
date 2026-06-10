@@ -1,23 +1,76 @@
 ﻿@model Facility
 
-<h2>Edit Facility</h2>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
 
-<form asp-action="Edit" method="post">
+<div class="card shadow-sm border-0">
 
-    <input type="hidden" asp-for="Id" />
+    <div class="card-header bg-white">
 
-    <div class="mb-3">
-        <label>Facility Name</label>
-        <input asp-for="FacilityTitle" class="form-control" />
-        <span asp-validation-for="FacilityTitle" class="text-danger"></span>
+        <h3 class="mb-0 fw-bold">
+            Edit Facility
+        </h3>
+
     </div>
 
-    <div class="mb-3">
-        <label>Description</label>
-        <textarea asp-for="FacilityDesc" class="form-control"></textarea>
+    <div class="card-body">
+
+        <form asp-action="Edit" method="post">
+
+            <input asp-for="Id" type="hidden" />
+
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger">
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="FacilityTitle"
+                       class="form-label fw-semibold">
+                    Facility Name
+                </label>
+
+                <input asp-for="FacilityTitle"
+                       class="form-control" />
+
+                <span asp-validation-for="FacilityTitle"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="FacilityDesc"
+                       class="form-label fw-semibold">
+                    Description
+                </label>
+
+                <textarea asp-for="FacilityDesc"
+                          rows="5"
+                          class="form-control"></textarea>
+
+            </div>
+
+            <hr />
+
+            <button class="btn btn-warning">
+
+                <i class="bi bi-pencil-square me-1"></i>
+                Update Facility
+
+            </button>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                Cancel
+
+            </a>
+
+        </form>
+
     </div>
 
-    <button class="btn btn-primary">Update</button>
-    <a asp-action="Index" class="btn btn-secondary">Back</a>
-
-</form>
+</div>

@@ -1,32 +1,131 @@
 ﻿@model IEnumerable<Facility>
 
-<h2>Facilities</h2>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
 
-<a asp-action="Create" class="btn btn-success mb-3">Add Facility</a>
+<div class="card shadow-sm border-0">
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
+    <div class="card-header bg-white">
 
-    <tbody>
-        @foreach (var f in Model)
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+                <h3 class="mb-0 fw-bold">Facilities</h3>
+                <small class="text-muted">
+                    Manage all school facilities
+                </small>
+            </div>
+
+            <a asp-action="Create"
+               class="btn btn-primary">
+
+                <i class="bi bi-plus-circle me-1"></i>
+                Add Facility
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="card-body">
+
+        <span class="badge bg-primary mb-3">
+            Total Facilities : @Model.Count()
+        </span>
+
+        @if (Model.Any())
         {
-            <tr>
-                <td>@f.FacilityTitle</td>
-                <td>@f.FacilityDesc</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@f.Id" class="btn btn-warning btn-sm">Edit</a>
-                    <a asp-action="Details" asp-route-id="@f.Id" class="btn btn-info btn-sm">View</a>
-                    <a asp-action="Delete" asp-route-id="@f.Id"
-                       class="btn btn-danger btn-sm"
-                       onclick="return confirm('Are you sure?')">Delete</a>
-                </td>
-            </tr>
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Facility</th>
+                            <th>Description</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @{
+                            int sr = 1;
+                        }
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>@sr</td>
+
+                                <td>
+                                    <strong>@item.FacilityTitle</strong>
+                                </td>
+
+                                <td>
+                                    @(item.FacilityDesc?.Length > 60
+                                        ? item.FacilityDesc.Substring(0, 60) + "..."
+                                        : item.FacilityDesc)
+                                </td>
+
+                                <td class="text-center">
+
+                                    <a asp-action="Details"
+                                       asp-route-id="@item.Id"
+                                       class="btn btn-info btn-sm me-1">
+
+                                        <i class="bi bi-eye"></i>
+
+                                    </a>
+
+                                    <a asp-action="Edit"
+                                       asp-route-id="@item.Id"
+                                       class="btn btn-warning btn-sm me-1">
+
+                                        <i class="bi bi-pencil-square"></i>
+
+                                    </a>
+
+                                    <a asp-action="Delete"
+                                       asp-route-id="@item.Id"
+                                       class="btn btn-danger btn-sm">
+
+                                        <i class="bi bi-trash"></i>
+
+                                    </a>
+
+                                </td>
+
+                            </tr>
+
+                            sr++;
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
         }
-    </tbody>
-</table>
+        else
+        {
+            <div class="text-center py-5">
+
+                <i class="bi bi-building-check display-3 text-secondary"></i>
+
+                <h5>No Facilities Found</h5>
+
+                <p class="text-muted">
+                    Click Add Facility to create your first facility.
+                </p>
+
+            </div>
+        }
+
+    </div>
+
+</div>

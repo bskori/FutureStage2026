@@ -4,14 +4,71 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+<div class="card border-danger shadow-sm">
 
-<h3>Are you sure you want to delete this?</h3>
+    <div class="card-header bg-danger text-white">
 
-<p><strong>@Model.CountryName</strong></p>
+        <h4 class="mb-0">
 
-<form  method="post">
-    <input type="hidden" asp-for="Id" />
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
 
-    <button type="submit" class="btn btn-danger">Delete</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-</form>
+            Delete Country
+
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="alert alert-warning">
+
+            <strong>Warning!</strong>
+            This action cannot be undone.
+
+        </div>
+
+        <h5 class="mb-4">
+
+            Are you sure you want to delete this country?
+
+        </h5>
+
+        <table class="table table-bordered">
+
+            <tr>
+                <th style="width:200px;">Country Name</th>
+                <td>@Model.CountryName</td>
+            </tr>
+
+        </table>
+
+        <form method="post">
+
+            <input type="hidden"
+                   asp-for="Id" />
+
+            <div class="d-flex gap-2">
+
+                <button type="submit"
+                        class="btn btn-danger">
+
+                    <i class="bi bi-trash me-1"></i>
+                    Delete Country
+
+                </button>
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    <i class="bi bi-arrow-left me-1"></i>
+                    Cancel
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

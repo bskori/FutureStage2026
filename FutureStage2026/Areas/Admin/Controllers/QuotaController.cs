@@ -5,6 +5,7 @@ namespace FutureStage2026.Areas.Admin.Controllers
     using global::FutureStage2026.Data;
     using global::FutureStage2026.Models;
     using Microsoft.AspNetCore.Mvc;
+    using static System.Runtime.InteropServices.JavaScript.JSType;
 
     namespace FutureStage2026.Areas.Admin.Controllers
     {
@@ -77,6 +78,14 @@ namespace FutureStage2026.Areas.Admin.Controllers
                 if (data == null)
                     return NotFound();
 
+                return View(data);
+            }
+
+            [HttpPost]
+            [ActionName("Delete")]
+            public IActionResult DeleteConfirmed(long id)
+            {
+                var data = _context.Quotas.Find(id);
                 var isUsed = _context.StandardSeatQuotas.Any(x => x.QuotaId == id);
 
                 if (isUsed)

@@ -1,21 +1,89 @@
 ﻿@model Facility
 
-<h2>Add Facility</h2>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
 
-<form asp-action="Create" method="post">
+<div class="card shadow-sm border-0">
 
-    <div class="mb-3">
-        <label>Facility Name</label>
-        <input asp-for="FacilityTitle" class="form-control" />
-        <span asp-validation-for="FacilityTitle" class="text-danger"></span>
+    <div class="card-header bg-white">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+                <h3 class="mb-0 fw-bold">Add Facility</h3>
+                <small class="text-muted">
+                    Create a new facility
+                </small>
+            </div>
+
+            <a asp-action="Index"
+               class="btn btn-outline-secondary">
+
+                <i class="bi bi-arrow-left"></i>
+                Back
+
+            </a>
+
+        </div>
+
     </div>
 
-    <div class="mb-3">
-        <label>Description</label>
-        <textarea asp-for="FacilityDesc" class="form-control"></textarea>
+    <div class="card-body">
+
+        <form asp-action="Create" method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger">
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="FacilityTitle"
+                       class="form-label fw-semibold">
+                    Facility Name
+                </label>
+
+                <input asp-for="FacilityTitle"
+                       class="form-control"
+                       placeholder="Enter Facility Name" />
+
+                <span asp-validation-for="FacilityTitle"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="FacilityDesc"
+                       class="form-label fw-semibold">
+                    Description
+                </label>
+
+                <textarea asp-for="FacilityDesc"
+                          rows="5"
+                          class="form-control"
+                          placeholder="Enter facility description"></textarea>
+
+            </div>
+
+            <hr />
+
+            <button class="btn btn-success">
+                <i class="bi bi-check-circle me-1"></i>
+                Save Facility
+            </button>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                Cancel
+
+            </a>
+
+        </form>
+
     </div>
 
-    <button class="btn btn-success">Save</button>
-    <a asp-action="Index" class="btn btn-secondary">Back</a>
-
-</form>
+</div>

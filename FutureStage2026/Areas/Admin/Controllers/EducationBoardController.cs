@@ -66,8 +66,23 @@ namespace FutureStage2026.Areas.Admin.Controllers
             return View(model);
         }
 
-        // DELETE
+        [HttpGet]
         public IActionResult Delete(long id)
+        {
+            var board = _context.EducationBoards.Find(id);
+
+            if(board == null)
+            {
+                return NotFound();
+            }
+
+            return View(board);
+        }
+
+        // DELETE
+        [HttpPost]
+        [ActionName("Delete")]
+        public IActionResult DeleteConfirmed(long id)
         {
             var board = _context.EducationBoards.Find(id);
 
@@ -75,9 +90,11 @@ namespace FutureStage2026.Areas.Admin.Controllers
             {
                 _context.EducationBoards.Remove(board);
                 _context.SaveChanges();
+                return RedirectToAction("Index");
             }
 
-            return RedirectToAction("Index");
+            return View(board);
+
         }
     }
 }

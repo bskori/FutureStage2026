@@ -12,6 +12,6 @@ namespace FutureStage2026.Models
         [StringLength(250)]
         public string QuotaDesc { get; set; }
 
-        public ICollection<StandardSeatQuota> StandardSeatQuotas { get; set; }
+        public ICollection<StandardSeatQuota>? StandardSeatQuotas { get; set; }
     }
 }

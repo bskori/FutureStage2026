@@ -12,6 +12,6 @@ namespace FutureStage2026.Models
 
         public string StandardDesc { get; set; }
 
-        public ICollection<SchoolStandard> SchoolStandards { get; set; }
+        public ICollection<SchoolStandard>? SchoolStandards { get; set; }
     }
 }

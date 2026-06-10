@@ -1,0 +1,21 @@
+﻿@model FutureStage2026.Models.Standard
+
+<h2>Add Standard</h2>
+
+<form asp-action="Create" method="post">
+
+    <div class="mb-3">
+        <label class="form-label">Standard Title</label>
+        <input asp-for="StandardTitle" class="form-control" />
+        <span asp-validation-for="StandardTitle" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea asp-for="StandardDesc" class="form-control"></textarea>
+    </div>
+
+    <button class="btn btn-success">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+
+</form>

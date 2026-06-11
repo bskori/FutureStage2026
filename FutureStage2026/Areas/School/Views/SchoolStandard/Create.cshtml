@@ -1,0 +1,86 @@
+﻿@model SchoolStandard
+
+<div class="card shadow-sm border-0">
+
+    <div class="card-header bg-white">
+
+        <h3 class="fw-bold mb-0">
+            Add Standard
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger">
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="StandardId"
+                       class="form-label fw-semibold">
+
+                    Standard
+
+                </label>
+
+                <select asp-for="StandardId"
+                        asp-items="ViewBag.Standards"
+                        class="form-select">
+
+                    <option value="">
+                        -- Select Standard --
+                    </option>
+
+                </select>
+
+                <span asp-validation-for="StandardId"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="IntakeCapacity"
+                       class="form-label fw-semibold">
+                </label>
+
+                <input asp-for="IntakeCapacity"
+                       class="form-control" />
+
+                <span asp-validation-for="IntakeCapacity"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <hr />
+
+            <button type="submit"
+                    class="btn btn-success">
+
+                <i class="bi bi-check-circle me-1"></i>
+                Save
+
+            </button>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

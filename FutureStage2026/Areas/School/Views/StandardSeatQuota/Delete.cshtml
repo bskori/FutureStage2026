@@ -1,0 +1,73 @@
+﻿@model StandardSeatQuota
+
+<div class="card border-danger shadow-sm">
+
+    <div class="card-header bg-danger text-white">
+
+        <h4 class="mb-0">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            Delete Seat Quota
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="alert alert-warning">
+
+            <strong>Warning!</strong>
+            This action cannot be undone.
+
+        </div>
+
+        <table class="table table-bordered">
+
+            <tr>
+                <th style="width:220px;">
+                    Standard
+                </th>
+                <td>
+                    @Model.SchoolStandard?.Standard?.StandardTitle
+                </td>
+            </tr>
+
+            <tr>
+                <th>Quota</th>
+                <td>
+                    @Model.Quota?.QuotaTitle
+                </td>
+            </tr>
+
+            <tr>
+                <th>No Of Seats</th>
+                <td>
+                    @Model.NoOfSeats
+                </td>
+            </tr>
+
+        </table>
+
+        <form method="post">
+
+            <input asp-for="Id" type="hidden" />
+
+            <button type="submit"
+                    class="btn btn-danger">
+
+                <i class="bi bi-trash me-1"></i>
+                Delete
+
+            </button>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>

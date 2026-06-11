@@ -1,0 +1,109 @@
+﻿@model StandardSeatQuota
+
+<div class="card shadow-sm border-0">
+
+    <div class="card-header bg-white">
+        <h3 class="fw-bold mb-0">
+            Add Seat Quota
+        </h3>
+    </div>
+
+    <div class="card-body">
+
+        <form method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger">
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="SchoolStandardId"
+                       class="form-label fw-semibold">
+
+                    Standard
+
+                </label>
+
+                <select asp-for="SchoolStandardId"
+                        asp-items="ViewBag.SchoolStandards"
+                        class="form-select">
+
+                    <option value="">
+                        -- Select Standard --
+                    </option>
+
+                </select>
+
+                <span asp-validation-for="SchoolStandardId"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="QuotaId"
+                       class="form-label fw-semibold">
+
+                    Quota
+
+                </label>
+
+                <select asp-for="QuotaId"
+                        asp-items="ViewBag.Quotas"
+                        class="form-select">
+
+                    <option value="">
+                        -- Select Quota --
+                    </option>
+
+                </select>
+
+                <span asp-validation-for="QuotaId"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="NoOfSeats"
+                       class="form-label fw-semibold">
+                </label>
+
+                <input asp-for="NoOfSeats"
+                       class="form-control" />
+
+                <span asp-validation-for="NoOfSeats"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <hr />
+
+            <button type="submit"
+                    class="btn btn-success">
+
+                <i class="bi bi-check-circle me-1"></i>
+                Save
+
+            </button>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
